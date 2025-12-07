@@ -169,7 +169,10 @@
                 <label for="password" class="form-label">Kata Sandi</label>
                 <input type="password" name="password" id="password" class="form-control" required placeholder="Minimal 6 karakter">
             </div>
-
+            <div class="mb-3">
+                <label>Konfirmasi Password</label>
+                <input type="password" name="password_confirmation" class="form-control" required>
+            </div>
             <button type="submit" class="btn btn-primary">Daftar Sekarang</button>
         </form>
 

@@ -106,9 +106,11 @@
             </form>
         </div>
     </nav>
-
     <main>
-        <div class="container-box">
+        <div class="container-box" >
+            <div class="d-flex align-items-center gap-3 justify-content-end">
+                <h5>Halo, {{ auth()->user()->name }} 👋</h5>
+            </div>
             <h4 class="mb-4">Daftar Catatan</h4>
             <a href="{{ route('notes.create') }}" class="btn btn-dark mb-3">+ Buat Catatan Baru</a>
 
@@ -130,7 +132,7 @@
                     <tbody>
                         @foreach($notes as $note)
                             <tr>
-                                <td>{{ $note->title }}</td>
+                                <td>{!! $note->title !!}</td>
                                 <td>{{ $note->created_at->format('d M Y') }}</td>
                                 <td class="text-center">
                                     <a href="{{ route('notes.show', $note->id) }}" class="btn btn-sm btn-view">Lihat</a>
@@ -148,7 +150,6 @@
             @endif
         </div>
     </main>
-
     <footer>
         <p>© {{ date('Y') }} Catatan Harian | Dibuat dengan hati oleh Anda</p>
     </footer>

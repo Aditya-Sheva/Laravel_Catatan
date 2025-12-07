@@ -59,22 +59,43 @@ class NoteController extends Controller
 
     public function update(Request $request, Note $note)
     {
-        if ($note->user_id !== auth()->id()) {
+        // Proteksi user
+        if ($note->user_id !== Auth::id()) {
             abort(403);
         }
 
+        // Validasi
         $request->validate([
-            'title' => 'required|string|max:255',
+            'title'   => 'required|string|max:255',
             'content' => 'required|string',
+            'gambar'  => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        $note->update([
-            'title' => $request->title,
+        // Data yang akan diupdate
+        $data = [
+            'title'   => $request->title,
             'content' => $request->content,
-        ]);
+        ];
 
-        return redirect()->route('notes.index')->with('success', 'Catatan berhasil diperbarui!');
+        // Jika ada gambar baru
+        if ($request->hasFile('gambar')) {
+
+            // Hapus gambar lama (kalau ada)
+            if ($note->gambar && \Storage::disk('public')->exists($note->gambar)) {
+                \Storage::disk('public')->delete($note->gambar);
+            }
+
+            // Simpan gambar baru
+            $data['gambar'] = $request->file('gambar')->store('notes', 'public');
+        }
+
+        // Update ke database
+        $note->update($data);
+
+        return redirect()->route('notes.show', $note->id)
+            ->with('success', 'Catatan berhasil diperbarui!');
     }
+
 
     public function show(Note $note)
     {
@@ -90,18 +111,20 @@ class NoteController extends Controller
 
     public function destroy(Note $note)
     {
-        $this->authorize('delete', $note);
+        // Cek apakah user pemilik catatan
+        if ($note->user_id !== Auth::id()) {
+            abort(403, 'Anda tidak punya akses menghapus catatan ini.');
+        }
+
+        // Hapus gambar jika ada
+        if ($note->gambar && \Storage::disk('public')->exists($note->gambar)) {
+            \Storage::disk('public')->delete($note->gambar);
+        }
+
+        // Hapus data dari database
         $note->delete();
-        return redirect()->route('notes.index')->with('success', 'Catatan berhasil dihapus!');
+
+        return redirect()->route('notes.index')
+            ->with('success', 'Catatan berhasil dihapus!');
     }
-
-    public function show($id)
-    {
-        // Ambil catatan berdasarkan ID
-        $note = Note::findOrFail($id);
-
-        // Kirim data ke view show.blade.php
-        return view('notes.show', compact('note'));
-    }
-
 }

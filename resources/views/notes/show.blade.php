@@ -97,29 +97,23 @@
 
     <main>
         <div class="container-box">
-            <h4 class="note-title">{{ $note->title }}</h4>
+            <h4 class="note-title">{!! $note->title !!}</h4>
             <p class="text-muted mb-2">Dibuat pada {{ $note->created_at->format('d M Y H:i') }}</p>
             <hr>
 
-            <!-- ✅ Tampilkan gambar jika ada -->
-            @if($note->gambar)
-                <div class="note-image">
-                    <img src="{{ asset('storage/' . $note->gambar) }}" alt="Gambar Catatan">
-                </div>
-            @endif
-
-
-            <div class="note-content">{{ $note->content }}</div>
-
+            <!-- Tampilkan gambar jika ada -->
+        @if($note->gambar)
+            <div class="note-image">
+                <img src="{{ asset('storage/' . $note->gambar) }}" alt="Gambar Catatan">
+            </div>
+        @endif
+            <div class="note-content">{!! $note->content !!}</div>
             <div class="mt-4 d-flex justify-content-between">
                 <a href="{{ route('notes.index') }}" class="btn btn-secondary">← Kembali</a>
                 <a href="{{ route('notes.edit', $note->id) }}" class="btn btn-warning">Edit Catatan</a>
             </div>
         </div>
     </main>
-
-    
-
     <footer>
         <p>© {{ date('Y') }} Catatan Harian | Dibuat dengan hati oleh Anda</p>
     </footer>
