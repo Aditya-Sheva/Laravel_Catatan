@@ -1,0 +1,4552 @@
+=================================================================================
+PROJECT: LARAVEL DEEP CONTEXT ANALYSIS
+DATE: 2025-12-08 04:10:39
+=================================================================================
+
+--- PROJECT STRUCTURE (DIRECTORY TREE) ---
+.
+├── .editorconfig
+├── .env
+├── .env.example
+├── .gitattributes
+├── .gitignore
+├── README.md
+├── TODO.md
+├── app
+│   ├── Http
+│   │   ├── Controllers
+│   │   │   ├── AdminController.php
+│   │   │   ├── AuthController.php
+│   │   │   ├── Controller.php
+│   │   │   ├── GambarController.php
+│   │   │   └── NoteController.php
+│   │   └── Middleware
+│   │       └── RoleMiddleware.php
+│   ├── Models
+│   │   ├── Gambar.php
+│   │   ├── Note.php
+│   │   └── User.php
+│   └── Providers
+│       └── AppServiceProvider.php
+├── artisan
+├── bootstrap
+│   ├── app.php
+│   ├── cache
+│   │   ├── .gitignore
+│   │   ├── packages.php
+│   │   └── services.php
+│   └── providers.php
+├── composer.json
+├── composer.lock
+├── config
+│   ├── app.php
+│   ├── auth.php
+│   ├── cache.php
+│   ├── database.php
+│   ├── filesystems.php
+│   ├── logging.php
+│   ├── mail.php
+│   ├── queue.php
+│   ├── services.php
+│   └── session.php
+├── context-gen.php
+├── database
+│   ├── .gitignore
+│   ├── database.sqlite
+│   ├── factories
+│   │   └── UserFactory.php
+│   ├── migrations
+│   │   ├── 2025_10_19_094740_create_users_table.php
+│   │   ├── 2025_10_19_094749_create_notes_table.php
+│   │   ├── 2025_10_19_124536_create_sessions_table.php
+│   │   ├── 2025_10_27_071134_create_gambars_table.php
+│   │   └── 2025_12_08_024105_add_role_to_users_table.php
+│   └── seeders
+│       └── DatabaseSeeder.php
+├── package-lock.json
+├── package.json
+├── phpunit.xml
+├── public
+│   ├── .htaccess
+│   ├── favicon.ico
+│   ├── index.php
+│   └── robots.txt
+├── resources
+│   ├── css
+│   │   └── app.css
+│   ├── js
+│   │   ├── app.js
+│   │   └── bootstrap.js
+│   └── views
+│       ├── admin
+│       │   └── users.blade.php
+│       ├── auth
+│       │   ├── login.blade.php
+│       │   └── register.blade.php
+│       ├── gambars
+│       │   ├── create.blade.php
+│       │   ├── edit.blade.php
+│       │   └── index.blade.php
+│       ├── notes
+│       │   ├── create.blade.php
+│       │   ├── edit.blade.php
+│       │   ├── index.blade.php
+│       │   └── show.blade.php
+│       └── welcome.blade.php
+├── routes
+│   ├── console.php
+│   └── web.php
+├── storage
+│   ├── app
+│   │   ├── .gitignore
+│   │   ├── private
+│   │   │   └── .gitignore
+│   │   └── public
+│   │       ├── .gitignore
+│   │       └── notes
+│   │           ├── EpTc1Wmn6mYedy8pi8Ry20Mn0OMrBVcfH2RXXUGD.png
+│   │           ├── PTTaZEWNffT9sQKbWnUuGlEZVMn1euOqBRQw7cDb.png
+│   │           ├── Rn2wM4QJAuLUlJw03UMDZhTlEKso5lw8N7aINGfL.png
+│   │           ├── qUqz56ofu5aDY5P10pHjiUsbp39mUMMYMEJ03fNa.jpg
+│   │           └── saE3cHvhgm55lxlQnmpN8id7di36vSWuA9MdGGG5.png
+│   ├── framework
+│   │   ├── .gitignore
+│   │   ├── cache
+│   │   │   ├── .gitignore
+│   │   │   └── data
+│   │   │       └── .gitignore
+│   │   ├── sessions
+│   │   │   └── .gitignore
+│   │   ├── testing
+│   │   │   └── .gitignore
+│   │   └── views
+│   │       ├── .gitignore
+│   │       ├── 00c9d2a798c1c32322488dfbe09e5d67.php
+│   │       ├── 01209ba763c404579d8a43571d48095f.php
+│   │       ├── 04522e05df1ac44d2dd845c0747130cd.php
+│   │       ├── 067146be6353ea7ede18c684682a7cc3.php
+│   │       ├── 085f5eeac0756453e0988e540699f346.php
+│   │       ├── 0c4cb5ac6b449c5b7962c796f2a7501a.php
+│   │       ├── 0d6235c4c79ae5870fc9c2602c443cf7.php
+│   │       ├── 10fc106f21fc65011c912bf29839f09e.php
+│   │       ├── 127ed6a8e49b6ef30ce8d6c9dbcbf3bd.php
+│   │       ├── 1642da849d1323b7cfabf36461f3918d.php
+│   │       ├── 1ffb48101ca399dc2f30e17123566ffa.php
+│   │       ├── 20d1ba5291c56efdebdc43d9c14fe34e.php
+│   │       ├── 23847515832c41db2b6536561ce4bc1b.php
+│   │       ├── 23db590539ceb4ae9dae270bb887723c.php
+│   │       ├── 24b51c7f290baa07be7ed90993f5471e.php
+│   │       ├── 24c76eaeb1507e4bf4d938a6028a7a4e.php
+│   │       ├── 2996f3b0d9068f111614c5a8b80400b0.php
+│   │       ├── 2a8057d008cf1c56be937efc7b725140.php
+│   │       ├── 2a898b7f546102fbc02f8ac84dc898f5.php
+│   │       ├── 2af856bf05e2320465a99465ce5d73aa.php
+│   │       ├── 2bd76cb7c3784a514badc0b8a0d30162.php
+│   │       ├── 2c1de879781920b63dbdef3ec65e4425.php
+│   │       ├── 2d8471d1d98280c5a29b8f967e49b588.php
+│   │       ├── 2dd03dd3b8b690293b3426d2f6ef7285.php
+│   │       ├── 3192ac432358fa78623db6f524e088e3.php
+│   │       ├── 340ba50fdbf704e43a3a6d884c539f53.php
+│   │       ├── 364d30bed718872a1ddb54e59b567cf7.php
+│   │       ├── 365aeb48e237e7c42a660986a96918cc.php
+│   │       ├── 372174a87d0f27060705751099467b59.php
+│   │       ├── 38a4733d503e3dc26f41776dedb99af2.php
+│   │       ├── 3cd93a84f836c56827a64d2af2486386.php
+│   │       ├── 3fb96bfd55cdd0999ff98c327cbba955.php
+│   │       ├── 468ba4b55017462bb24e428fbb958398.php
+│   │       ├── 522e70d870887b331fb722a94dd906c1.php
+│   │       ├── 534a183c237fe02e3ea9efe73008dfdb.php
+│   │       ├── 546bf5d13c0f157532e75c8ff6a8b22f.php
+│   │       ├── 56818adda7e9ca63a4a2507222864160.php
+│   │       ├── 581d1fa0397f519eea705bddb64e950f.php
+│   │       ├── 590c3869436d10c3301480aa8e27ac0f.php
+│   │       ├── 5943248e83cf248bbeef1850e3f4a21a.php
+│   │       ├── 621f300f3c2ad8375b51869c7cdac63c.php
+│   │       ├── 638aa7a95d85e78a27dbc39dc28ba74d.php
+│   │       ├── 69cf370b2435880375ed5c3f3393356b.php
+│   │       ├── 6fc50a5ac8c5ba5ccc0236bc2f4259e8.php
+│   │       ├── 73e9e1dc39779f074b358904b51da8ae.php
+│   │       ├── 7409460ed151016cd570ed1af99f3505.php
+│   │       ├── 77b179dd9357f6bd818a1837c1612373.php
+│   │       ├── 78ff40bc2f7b8cf3994a37eec441e3ba.php
+│   │       ├── 7b3100d4c10869035aae3108a5b9682f.php
+│   │       ├── 7d71206b34a0751feee92d95679b1dfb.php
+│   │       ├── 7e06c397b78399c5262410ff109adc82.php
+│   │       ├── 80a74fc96344aab52221e63f3012fc7a.php
+│   │       ├── 816ab19a5c9eaa95cbe4225e89efaa7a.php
+│   │       ├── 836c7089c8846d566c667b6f7c10353f.php
+│   │       ├── 89143a2118445ffc7fa8918e3cd2222c.php
+│   │       ├── 8bc1b5a24ec592f444efe5c8e6f4d125.php
+│   │       ├── 8ce809d77b6f9330a69ac0cea828f082.php
+│   │       ├── 8ebf9263a775ebf3ef97e86a7ceedf3e.php
+│   │       ├── 93e2dfd62470c1d7d79c2da96e26d19c.php
+│   │       ├── 9a3e27716517ffa053971631c23eba1a.php
+│   │       ├── 9d049dc4acd2124db02fb0dd7182bf99.php
+│   │       ├── 9ddf0a4082e968dac1ffce6b49970a87.php
+│   │       ├── a0b31aab9481ba053200b07796f6a0bc.php
+│   │       ├── a2493a90c17faed95ab7c98907ed9762.php
+│   │       ├── a2ed00e1d2b01ec0d22cbdb2c62f9416.php
+│   │       ├── a4bfb66ad4862bea2da95f0aebd36be8.php
+│   │       ├── a4f499e1a86c913db5510fea5c6d397e.php
+│   │       ├── aa3787066ababb327ce60db0b9a4dcb4.php
+│   │       ├── adbe118ed1a0e5d9eb38f47eebca6ff3.php
+│   │       ├── ade97fb00ab2394aff9970deff90c9ce.php
+│   │       ├── b5b8beb1d61ba77593b341f73e752707.php
+│   │       ├── b60cde3c036dee9cf61365e16b3c69b2.php
+│   │       ├── bf994f071612b7b08506f8c7bd8396b8.php
+│   │       ├── c0c5cb7581da8f3ef267779e90576b85.php
+│   │       ├── c0d5a7485bbdd96223ee4de3f2d6f34c.php
+│   │       ├── c0ee641db72d487b24d49362794483ec.php
+│   │       ├── c2b73e058a9ebb8a01b9ff08b01a16fc.php
+│   │       ├── c2f403b941dce6761b0c0ee4a37c2627.php
+│   │       ├── c56b59ad2e13571dcba05115036dc36f.php
+│   │       ├── cec4ac51b40cb4e3ea5b023f93d1499f.php
+│   │       ├── d54ba6d5a3b04e05f17a828ed92bb1fa.php
+│   │       ├── d81f5fd9931dacbca12471751b92d948.php
+│   │       ├── dc04f0265737e7af200325dd8f8777e1.php
+│   │       ├── dda6ae41c3b75081bb9bd5ec9c2a610e.php
+│   │       ├── e5bef2022ae1cd134e396d82e61d9c5a.php
+│   │       ├── e7cd618010efa9160152d41fb3a1565a.php
+│   │       ├── e7d2b78387ece0243f59b94692421ef6.php
+│   │       ├── e9c599514b78b70ee47113d4f8458d0d.php
+│   │       ├── eab6a21b2525a1e7236f680c12201595.php
+│   │       ├── efb37708f5cfa03e14b2153e9e0e1786.php
+│   │       ├── f16a47f97a40d48d3f0ef73cb933b7fc.php
+│   │       ├── f172b7cf658d8bff9eaa9235110f2fc3.php
+│   │       ├── f6f668918fbfd8b678cbbd33102d7044.php
+│   │       ├── f9cb800689741a84c1634aacf2758280.php
+│   │       └── feee4654abbe5852b793d943e83bc558.php
+│   └── logs
+│       ├── .gitignore
+│       └── laravel.log
+├── tests
+│   ├── Feature
+│   │   └── ExampleTest.php
+│   ├── Pest.php
+│   ├── TestCase.php
+│   └── Unit
+│       └── ExampleTest.php
+└── vite.config.js
+
+=================================================================================
+
+
+// --- FILE: .gitignore ---
+```gitignore
+*.log
+.DS_Store
+.env
+.env.backup
+.env.production
+.phpactor.json
+.phpunit.result.cache
+/.fleet
+/.idea
+/.nova
+/.phpunit.cache
+/.vscode
+/.zed
+/auth.json
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/storage/pail
+/vendor
+Homestead.json
+Homestead.yaml
+Thumbs.db
+
+```
+
+// --- FILE: app\Http\Controllers\AdminController.php ---
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\User;
+
+class AdminController extends Controller
+{
+    public function users()
+    {
+        $users = User::withCount('notes')->get();
+        return view('admin.users', compact('users'));
+    }
+}
+
+```
+
+// --- FILE: app\Http\Controllers\AuthController.php ---
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
+class AuthController extends Controller
+{
+    public function showLogin()
+    {
+        return view('auth.login');
+    }
+
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+
+            if (auth()->user()->role === 'admin') {
+                return redirect()->route('admin.users');
+            }
+
+            return redirect()->route('notes.index');
+        }
+
+        return back()->with('error', 'Email atau password salah!');
+    }
+
+
+    public function showRegister()
+    {
+        return view('auth.register');
+    }
+
+    public function register(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|confirmed|min:6'
+        ]);
+
+        $role = User::count() === 0 ? 'admin' : 'user';
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => $role
+        ]);
+
+        return redirect()->route('login')->with('success', 'Pendaftaran berhasil!');
+    }
+
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('login');
+    }
+}
+
+```
+
+// --- FILE: app\Http\Controllers\Controller.php ---
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+abstract class Controller
+{
+    //
+}
+
+```
+
+// --- FILE: app\Http\Controllers\GambarController.php ---
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Gambar;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
+class GambarController extends Controller
+{
+    public function index()
+    {
+        $gambars = Gambar::latest()->get();
+        return view('gambars.index', compact('gambars'));
+    }
+
+    public function create()
+    {
+        return view('gambars.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'judul' => 'required|string|max:255',
+            'gambar' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
+        ]);
+
+        $path = null;
+        if ($request->hasFile('gambar')) {
+            $path = $request->file('gambar')->store('gambars', 'public');
+        }
+
+        Gambar::create([
+            'judul' => $request->judul,
+            'gambar' => $path,
+        ]);
+
+        return redirect()->route('gambars.index')->with('success', 'Gambar berhasil ditambahkan!');
+    }
+
+    public function edit(Gambar $gambar)
+    {
+        return view('gambars.edit', compact('gambar'));
+    }
+
+    public function update(Request $request, Gambar $gambar)
+    {
+        $request->validate([
+            'judul' => 'required|string|max:255',
+            'gambar' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
+        ]);
+
+        $path = $gambar->gambar;
+
+        if ($request->hasFile('gambar')) {
+            // hapus gambar lama
+            if ($path && Storage::disk('public')->exists($path)) {
+                Storage::disk('public')->delete($path);
+            }
+
+            // upload baru
+            $path = $request->file('gambar')->store('gambars', 'public');
+        }
+
+        $gambar->update([
+            'judul' => $request->judul,
+            'gambar' => $path,
+        ]);
+
+        return redirect()->route('gambars.index')->with('success', 'Gambar berhasil diperbarui!');
+    }
+
+    public function destroy(Gambar $gambar)
+    {
+        if ($gambar->gambar && Storage::disk('public')->exists($gambar->gambar)) {
+            Storage::disk('public')->delete($gambar->gambar);
+        }
+
+        $gambar->delete();
+
+        return redirect()->route('gambars.index')->with('success', 'Gambar berhasil dihapus!');
+    }
+}
+
+```
+
+// --- FILE: app\Http\Controllers\NoteController.php ---
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Note;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class NoteController extends Controller
+{
+    public function index()
+    {
+        $notes = Note::where('user_id', Auth::id())->latest()->get();
+        return view('notes.index', compact('notes'));
+    }
+
+    public function create()
+    {
+        return view('notes.create');
+    }
+
+    public function store(Request $request)
+    {
+        // Validasi input
+        $request->validate([
+            'title'   => 'required|string|max:255',
+            'content' => 'required|string',
+            'gambar'  => 'nullable|image|mimes:jpg,jpeg,png|max:2048', // validasi file gambar
+        ]);
+
+        // Proses upload gambar (jika ada)
+        $path = null;
+        if ($request->hasFile('gambar')) {
+            // Simpan ke storage/app/public/notes
+            $path = $request->file('gambar')->store('notes', 'public');
+        }
+
+        // Simpan data ke database
+        Note::create([
+            'user_id' => Auth::id(),
+            'title'   => $request->title,
+            'content' => $request->content,
+            'gambar'  => $path, // simpan path gambar ke kolom 'gambar'
+        ]);
+
+        return redirect()->route('notes.index')->with('success', 'Catatan berhasil ditambahkan!');
+    }
+
+
+    public function edit(Note $note)
+    {
+        // Pastikan hanya pemilik catatan yang bisa edit
+        if ($note->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        return view('notes.edit', compact('note'));
+    }
+
+    public function update(Request $request, Note $note)
+    {
+        // Proteksi user
+        if ($note->user_id !== Auth::id()) {
+            abort(403);
+        }
+
+        // Validasi
+        $request->validate([
+            'title'   => 'required|string|max:255',
+            'content' => 'required|string',
+            'gambar'  => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        // Data yang akan diupdate
+        $data = [
+            'title'   => $request->title,
+            'content' => $request->content,
+        ];
+
+        // Jika ada gambar baru
+        if ($request->hasFile('gambar')) {
+
+            // Hapus gambar lama (kalau ada)
+            if ($note->gambar && \Storage::disk('public')->exists($note->gambar)) {
+                \Storage::disk('public')->delete($note->gambar);
+            }
+
+            // Simpan gambar baru
+            $data['gambar'] = $request->file('gambar')->store('notes', 'public');
+        }
+
+        // Update ke database
+        $note->update($data);
+
+        return redirect()->route('notes.show', $note->id)
+            ->with('success', 'Catatan berhasil diperbarui!');
+    }
+
+
+    public function show(Note $note)
+    {
+        // Pastikan hanya pemilik catatan yang bisa melihat
+        if ($note->user_id !== Auth::id()) {
+            abort(403, 'Anda tidak memiliki akses ke catatan ini.');
+        }
+
+        return view('notes.show', compact('note'));
+    }
+
+
+
+    public function destroy(Note $note)
+    {
+        // Cek apakah user pemilik catatan
+        if ($note->user_id !== Auth::id()) {
+            abort(403, 'Anda tidak punya akses menghapus catatan ini.');
+        }
+
+        // Hapus gambar jika ada
+        if ($note->gambar && \Storage::disk('public')->exists($note->gambar)) {
+            \Storage::disk('public')->delete($note->gambar);
+        }
+
+        // Hapus data dari database
+        $note->delete();
+
+        return redirect()->route('notes.index')
+            ->with('success', 'Catatan berhasil dihapus!');
+    }
+}
+
+```
+
+// --- FILE: app\Http\Middleware\RoleMiddleware.php ---
+```php
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Http\Request;
+
+class RoleMiddleware
+{
+    public function handle(Request $request, Closure $next, $role)
+    {
+        if (!auth()->check() || auth()->user()->role !== $role) {
+            abort(403);
+        }
+
+        return $next($request);
+    }
+}
+
+```
+
+// --- FILE: app\Models\Gambar.php ---
+```php
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Gambar extends Model
+{
+    use HasFactory;
+
+    protected $fillable = ['title', 'content', 'image'];
+
+}
+
+```
+
+// --- FILE: app\Models\Note.php ---
+```php
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Note extends Model
+{
+    use HasFactory;
+
+    protected $fillable = ['user_id', 'title', 'content', 'gambar'];
+
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+}
+
+```
+
+// --- FILE: app\Models\User.php ---
+```php
+<?php
+namespace App\Models;
+
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+class User extends Authenticatable
+{
+    use HasFactory, Notifiable;
+
+    protected $fillable = ['name', 'email', 'password', 'role'];
+
+    protected $hidden = ['password'];
+
+    public function notes()
+    {
+        return $this->hasMany(Note::class);
+    }
+}
+
+```
+
+// --- FILE: app\Providers\AppServiceProvider.php ---
+```php
+<?php
+
+namespace App\Providers;
+
+use Illuminate\Support\ServiceProvider;
+
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Register any application services.
+     */
+    public function register(): void
+    {
+        //
+    }
+
+    /**
+     * Bootstrap any application services.
+     */
+    public function boot(): void
+    {
+        //
+    }
+}
+
+```
+
+// --- FILE: bootstrap\app.php ---
+```php
+<?php
+
+use Illuminate\Foundation\Application;
+use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Foundation\Configuration\Middleware;
+
+return Application::configure(basePath: dirname(__DIR__))
+    ->withRouting(
+        web: __DIR__.'/../routes/web.php',
+        commands: __DIR__.'/../routes/console.php',
+        health: '/up',
+    )
+    ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->alias([
+            'role' => \App\Http\Middleware\RoleMiddleware::class,
+        ]);
+    })
+    ->withExceptions(function (Exceptions $exceptions): void {
+        //
+    })->create();
+
+```
+
+// --- FILE: bootstrap\cache\.gitignore ---
+```gitignore
+*
+!.gitignore
+
+```
+
+// --- FILE: bootstrap\cache\packages.php ---
+```php
+<?php return array (
+  'laravel/pail' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Laravel\\Pail\\PailServiceProvider',
+    ),
+  ),
+  'laravel/sail' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Laravel\\Sail\\SailServiceProvider',
+    ),
+  ),
+  'laravel/tinker' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Laravel\\Tinker\\TinkerServiceProvider',
+    ),
+  ),
+  'nesbot/carbon' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Carbon\\Laravel\\ServiceProvider',
+    ),
+  ),
+  'nunomaduro/collision' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    ),
+  ),
+  'nunomaduro/termwind' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Termwind\\Laravel\\TermwindServiceProvider',
+    ),
+  ),
+  'pestphp/pest-plugin-laravel' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Pest\\Laravel\\PestServiceProvider',
+    ),
+  ),
+);
+```
+
+// --- FILE: bootstrap\cache\services.php ---
+```php
+<?php return array (
+  'providers' => 
+  array (
+    0 => 'Illuminate\\Auth\\AuthServiceProvider',
+    1 => 'Illuminate\\Broadcasting\\BroadcastServiceProvider',
+    2 => 'Illuminate\\Bus\\BusServiceProvider',
+    3 => 'Illuminate\\Cache\\CacheServiceProvider',
+    4 => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    5 => 'Illuminate\\Concurrency\\ConcurrencyServiceProvider',
+    6 => 'Illuminate\\Cookie\\CookieServiceProvider',
+    7 => 'Illuminate\\Database\\DatabaseServiceProvider',
+    8 => 'Illuminate\\Encryption\\EncryptionServiceProvider',
+    9 => 'Illuminate\\Filesystem\\FilesystemServiceProvider',
+    10 => 'Illuminate\\Foundation\\Providers\\FoundationServiceProvider',
+    11 => 'Illuminate\\Hashing\\HashServiceProvider',
+    12 => 'Illuminate\\Mail\\MailServiceProvider',
+    13 => 'Illuminate\\Notifications\\NotificationServiceProvider',
+    14 => 'Illuminate\\Pagination\\PaginationServiceProvider',
+    15 => 'Illuminate\\Auth\\Passwords\\PasswordResetServiceProvider',
+    16 => 'Illuminate\\Pipeline\\PipelineServiceProvider',
+    17 => 'Illuminate\\Queue\\QueueServiceProvider',
+    18 => 'Illuminate\\Redis\\RedisServiceProvider',
+    19 => 'Illuminate\\Session\\SessionServiceProvider',
+    20 => 'Illuminate\\Translation\\TranslationServiceProvider',
+    21 => 'Illuminate\\Validation\\ValidationServiceProvider',
+    22 => 'Illuminate\\View\\ViewServiceProvider',
+    23 => 'Laravel\\Pail\\PailServiceProvider',
+    24 => 'Laravel\\Sail\\SailServiceProvider',
+    25 => 'Laravel\\Tinker\\TinkerServiceProvider',
+    26 => 'Carbon\\Laravel\\ServiceProvider',
+    27 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    28 => 'Termwind\\Laravel\\TermwindServiceProvider',
+    29 => 'Pest\\Laravel\\PestServiceProvider',
+    30 => 'App\\Providers\\AppServiceProvider',
+  ),
+  'eager' => 
+  array (
+    0 => 'Illuminate\\Auth\\AuthServiceProvider',
+    1 => 'Illuminate\\Cookie\\CookieServiceProvider',
+    2 => 'Illuminate\\Database\\DatabaseServiceProvider',
+    3 => 'Illuminate\\Encryption\\EncryptionServiceProvider',
+    4 => 'Illuminate\\Filesystem\\FilesystemServiceProvider',
+    5 => 'Illuminate\\Foundation\\Providers\\FoundationServiceProvider',
+    6 => 'Illuminate\\Notifications\\NotificationServiceProvider',
+    7 => 'Illuminate\\Pagination\\PaginationServiceProvider',
+    8 => 'Illuminate\\Session\\SessionServiceProvider',
+    9 => 'Illuminate\\View\\ViewServiceProvider',
+    10 => 'Laravel\\Pail\\PailServiceProvider',
+    11 => 'Carbon\\Laravel\\ServiceProvider',
+    12 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    13 => 'Termwind\\Laravel\\TermwindServiceProvider',
+    14 => 'Pest\\Laravel\\PestServiceProvider',
+    15 => 'App\\Providers\\AppServiceProvider',
+  ),
+  'deferred' => 
+  array (
+    'Illuminate\\Broadcasting\\BroadcastManager' => 'Illuminate\\Broadcasting\\BroadcastServiceProvider',
+    'Illuminate\\Contracts\\Broadcasting\\Factory' => 'Illuminate\\Broadcasting\\BroadcastServiceProvider',
+    'Illuminate\\Contracts\\Broadcasting\\Broadcaster' => 'Illuminate\\Broadcasting\\BroadcastServiceProvider',
+    'Illuminate\\Bus\\Dispatcher' => 'Illuminate\\Bus\\BusServiceProvider',
+    'Illuminate\\Contracts\\Bus\\Dispatcher' => 'Illuminate\\Bus\\BusServiceProvider',
+    'Illuminate\\Contracts\\Bus\\QueueingDispatcher' => 'Illuminate\\Bus\\BusServiceProvider',
+    'Illuminate\\Bus\\BatchRepository' => 'Illuminate\\Bus\\BusServiceProvider',
+    'Illuminate\\Bus\\DatabaseBatchRepository' => 'Illuminate\\Bus\\BusServiceProvider',
+    'cache' => 'Illuminate\\Cache\\CacheServiceProvider',
+    'cache.store' => 'Illuminate\\Cache\\CacheServiceProvider',
+    'cache.psr6' => 'Illuminate\\Cache\\CacheServiceProvider',
+    'memcached.connector' => 'Illuminate\\Cache\\CacheServiceProvider',
+    'Illuminate\\Cache\\RateLimiter' => 'Illuminate\\Cache\\CacheServiceProvider',
+    'Illuminate\\Foundation\\Console\\AboutCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Cache\\Console\\ClearCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Cache\\Console\\ForgetCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\ClearCompiledCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Auth\\Console\\ClearResetsCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\ConfigCacheCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\ConfigClearCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\ConfigShowCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Database\\Console\\DbCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Database\\Console\\MonitorCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Database\\Console\\PruneCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Database\\Console\\ShowCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Database\\Console\\TableCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Database\\Console\\WipeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\DownCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\EnvironmentCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\EnvironmentDecryptCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\EnvironmentEncryptCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\EventCacheCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\EventClearCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\EventListCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Concurrency\\Console\\InvokeSerializedClosureCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\KeyGenerateCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\OptimizeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\OptimizeClearCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\PackageDiscoverCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Cache\\Console\\PruneStaleTagsCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Queue\\Console\\ClearCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Queue\\Console\\ListFailedCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Queue\\Console\\FlushFailedCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Queue\\Console\\ForgetFailedCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Queue\\Console\\ListenCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Queue\\Console\\MonitorCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Queue\\Console\\PruneBatchesCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Queue\\Console\\PruneFailedJobsCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Queue\\Console\\RestartCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Queue\\Console\\RetryCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Queue\\Console\\RetryBatchCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Queue\\Console\\WorkCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\RouteCacheCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\RouteClearCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\RouteListCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Database\\Console\\DumpCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Database\\Console\\Seeds\\SeedCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Console\\Scheduling\\ScheduleFinishCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Console\\Scheduling\\ScheduleListCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Console\\Scheduling\\ScheduleRunCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Console\\Scheduling\\ScheduleClearCacheCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Console\\Scheduling\\ScheduleTestCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Console\\Scheduling\\ScheduleWorkCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Console\\Scheduling\\ScheduleInterruptCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Database\\Console\\ShowModelCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\StorageLinkCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\StorageUnlinkCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\UpCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\ViewCacheCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\ViewClearCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\ApiInstallCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\BroadcastingInstallCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Cache\\Console\\CacheTableCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\CastMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\ChannelListCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\ChannelMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\ClassMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\ComponentMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\ConfigMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\ConfigPublishCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\ConsoleMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Routing\\Console\\ControllerMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\DocsCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\EnumMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\EventGenerateCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\EventMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\ExceptionMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Database\\Console\\Factories\\FactoryMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\InterfaceMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\JobMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\JobMiddlewareMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\LangPublishCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\ListenerMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\MailMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Routing\\Console\\MiddlewareMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\ModelMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\NotificationMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Notifications\\Console\\NotificationTableCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\ObserverMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\PolicyMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\ProviderMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Queue\\Console\\FailedTableCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Queue\\Console\\TableCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Queue\\Console\\BatchesTableCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\RequestMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\ResourceMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\RuleMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\ScopeMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Database\\Console\\Seeds\\SeederMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Session\\Console\\SessionTableCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\ServeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\StubPublishCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\TestMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\TraitMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\VendorPublishCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Foundation\\Console\\ViewMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'migrator' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'migration.repository' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'migration.creator' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Database\\Migrations\\Migrator' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Database\\Console\\Migrations\\MigrateCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Database\\Console\\Migrations\\FreshCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Database\\Console\\Migrations\\InstallCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Database\\Console\\Migrations\\RefreshCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Database\\Console\\Migrations\\ResetCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Database\\Console\\Migrations\\RollbackCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Database\\Console\\Migrations\\StatusCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Database\\Console\\Migrations\\MigrateMakeCommand' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'composer' => 'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider',
+    'Illuminate\\Concurrency\\ConcurrencyManager' => 'Illuminate\\Concurrency\\ConcurrencyServiceProvider',
+    'hash' => 'Illuminate\\Hashing\\HashServiceProvider',
+    'hash.driver' => 'Illuminate\\Hashing\\HashServiceProvider',
+    'mail.manager' => 'Illuminate\\Mail\\MailServiceProvider',
+    'mailer' => 'Illuminate\\Mail\\MailServiceProvider',
+    'Illuminate\\Mail\\Markdown' => 'Illuminate\\Mail\\MailServiceProvider',
+    'auth.password' => 'Illuminate\\Auth\\Passwords\\PasswordResetServiceProvider',
+    'auth.password.broker' => 'Illuminate\\Auth\\Passwords\\PasswordResetServiceProvider',
+    'Illuminate\\Contracts\\Pipeline\\Hub' => 'Illuminate\\Pipeline\\PipelineServiceProvider',
+    'pipeline' => 'Illuminate\\Pipeline\\PipelineServiceProvider',
+    'queue' => 'Illuminate\\Queue\\QueueServiceProvider',
+    'queue.connection' => 'Illuminate\\Queue\\QueueServiceProvider',
+    'queue.failer' => 'Illuminate\\Queue\\QueueServiceProvider',
+    'queue.listener' => 'Illuminate\\Queue\\QueueServiceProvider',
+    'queue.worker' => 'Illuminate\\Queue\\QueueServiceProvider',
+    'redis' => 'Illuminate\\Redis\\RedisServiceProvider',
+    'redis.connection' => 'Illuminate\\Redis\\RedisServiceProvider',
+    'translator' => 'Illuminate\\Translation\\TranslationServiceProvider',
+    'translation.loader' => 'Illuminate\\Translation\\TranslationServiceProvider',
+    'validator' => 'Illuminate\\Validation\\ValidationServiceProvider',
+    'validation.presence' => 'Illuminate\\Validation\\ValidationServiceProvider',
+    'Illuminate\\Contracts\\Validation\\UncompromisedVerifier' => 'Illuminate\\Validation\\ValidationServiceProvider',
+    'Laravel\\Sail\\Console\\InstallCommand' => 'Laravel\\Sail\\SailServiceProvider',
+    'Laravel\\Sail\\Console\\PublishCommand' => 'Laravel\\Sail\\SailServiceProvider',
+    'command.tinker' => 'Laravel\\Tinker\\TinkerServiceProvider',
+  ),
+  'when' => 
+  array (
+    'Illuminate\\Broadcasting\\BroadcastServiceProvider' => 
+    array (
+    ),
+    'Illuminate\\Bus\\BusServiceProvider' => 
+    array (
+    ),
+    'Illuminate\\Cache\\CacheServiceProvider' => 
+    array (
+    ),
+    'Illuminate\\Foundation\\Providers\\ConsoleSupportServiceProvider' => 
+    array (
+    ),
+    'Illuminate\\Concurrency\\ConcurrencyServiceProvider' => 
+    array (
+    ),
+    'Illuminate\\Hashing\\HashServiceProvider' => 
+    array (
+    ),
+    'Illuminate\\Mail\\MailServiceProvider' => 
+    array (
+    ),
+    'Illuminate\\Auth\\Passwords\\PasswordResetServiceProvider' => 
+    array (
+    ),
+    'Illuminate\\Pipeline\\PipelineServiceProvider' => 
+    array (
+    ),
+    'Illuminate\\Queue\\QueueServiceProvider' => 
+    array (
+    ),
+    'Illuminate\\Redis\\RedisServiceProvider' => 
+    array (
+    ),
+    'Illuminate\\Translation\\TranslationServiceProvider' => 
+    array (
+    ),
+    'Illuminate\\Validation\\ValidationServiceProvider' => 
+    array (
+    ),
+    'Laravel\\Sail\\SailServiceProvider' => 
+    array (
+    ),
+    'Laravel\\Tinker\\TinkerServiceProvider' => 
+    array (
+    ),
+  ),
+);
+```
+
+// --- FILE: bootstrap\providers.php ---
+```php
+<?php
+
+return [
+    App\Providers\AppServiceProvider::class,
+];
+
+```
+
+// --- FILE: composer.json ---
+```json
+{
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "laravel/laravel",
+    "type": "project",
+    "description": "The skeleton application for the Laravel framework.",
+    "keywords": [
+        "laravel",
+        "framework"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^8.2",
+        "laravel/framework": "^12.0",
+        "laravel/tinker": "^2.10.1"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.23",
+        "laravel/pail": "^1.2.2",
+        "laravel/pint": "^1.24",
+        "laravel/sail": "^1.41",
+        "mockery/mockery": "^1.6",
+        "nunomaduro/collision": "^8.6",
+        "pestphp/pest": "^4.1",
+        "pestphp/pest-plugin-laravel": "^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "setup": [
+            "composer install",
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php artisan key:generate",
+            "@php artisan migrate --force",
+            "npm install",
+            "npm run build"
+        ],
+        "dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "npx concurrently -c \"#93c5fd,#c4b5fd,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"npm run dev\" --names='server,queue,vite'"
+        ],
+        "test": [
+            "@php artisan config:clear --ansi",
+            "@php artisan test"
+        ],
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi",
+            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
+            "@php artisan migrate --graceful --ansi"
+        ],
+        "pre-package-uninstall": [
+            "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
+```
+
+// --- FILE: config\app.php ---
+```php
+<?php
+
+return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Name
+    |--------------------------------------------------------------------------
+    |
+    | This value is the name of your application, which will be used when the
+    | framework needs to place the application's name in a notification or
+    | other UI elements where an application name needs to be displayed.
+    |
+    */
+
+    'name' => env('APP_NAME', 'Laravel'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Environment
+    |--------------------------------------------------------------------------
+    |
+    | This value determines the "environment" your application is currently
+    | running in. This may determine how you prefer to configure various
+    | services the application utilizes. Set this in your ".env" file.
+    |
+    */
+
+    'env' => env('APP_ENV', 'production'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Debug Mode
+    |--------------------------------------------------------------------------
+    |
+    | When your application is in debug mode, detailed error messages with
+    | stack traces will be shown on every error that occurs within your
+    | application. If disabled, a simple generic error page is shown.
+    |
+    */
+
+    'debug' => (bool) env('APP_DEBUG', false),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application URL
+    |--------------------------------------------------------------------------
+    |
+    | This URL is used by the console to properly generate URLs when using
+    | the Artisan command line tool. You should set this to the root of
+    | the application so that it's available within Artisan commands.
+    |
+    */
+
+    'url' => env('APP_URL', 'http://localhost'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Timezone
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify the default timezone for your application, which
+    | will be used by the PHP date and date-time functions. The timezone
+    | is set to "UTC" by default as it is suitable for most use cases.
+    |
+    */
+
+    'timezone' => 'UTC',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Locale Configuration
+    |--------------------------------------------------------------------------
+    |
+    | The application locale determines the default locale that will be used
+    | by Laravel's translation / localization methods. This option can be
+    | set to any locale for which you plan to have translation strings.
+    |
+    */
+
+    'locale' => env('APP_LOCALE', 'en'),
+
+    'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
+
+    'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Encryption Key
+    |--------------------------------------------------------------------------
+    |
+    | This key is utilized by Laravel's encryption services and should be set
+    | to a random, 32 character string to ensure that all encrypted values
+    | are secure. You should do this prior to deploying the application.
+    |
+    */
+
+    'cipher' => 'AES-256-CBC',
+
+    'key' => env('APP_KEY'),
+
+    'previous_keys' => [
+        ...array_filter(
+            explode(',', (string) env('APP_PREVIOUS_KEYS', ''))
+        ),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Maintenance Mode Driver
+    |--------------------------------------------------------------------------
+    |
+    | These configuration options determine the driver used to determine and
+    | manage Laravel's "maintenance mode" status. The "cache" driver will
+    | allow maintenance mode to be controlled across multiple machines.
+    |
+    | Supported drivers: "file", "cache"
+    |
+    */
+
+    'maintenance' => [
+        'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
+        'store' => env('APP_MAINTENANCE_STORE', 'database'),
+    ],
+
+];
+
+```
+
+// --- FILE: config\auth.php ---
+```php
+<?php
+
+return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Authentication Defaults
+    |--------------------------------------------------------------------------
+    |
+    | This option defines the default authentication "guard" and password
+    | reset "broker" for your application. You may change these values
+    | as required, but they're a perfect start for most applications.
+    |
+    */
+
+    'defaults' => [
+        'guard' => env('AUTH_GUARD', 'web'),
+        'passwords' => env('AUTH_PASSWORD_BROKER', 'users'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Authentication Guards
+    |--------------------------------------------------------------------------
+    |
+    | Next, you may define every authentication guard for your application.
+    | Of course, a great default configuration has been defined for you
+    | which utilizes session storage plus the Eloquent user provider.
+    |
+    | All authentication guards have a user provider, which defines how the
+    | users are actually retrieved out of your database or other storage
+    | system used by the application. Typically, Eloquent is utilized.
+    |
+    | Supported: "session"
+    |
+    */
+
+    'guards' => [
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | User Providers
+    |--------------------------------------------------------------------------
+    |
+    | All authentication guards have a user provider, which defines how the
+    | users are actually retrieved out of your database or other storage
+    | system used by the application. Typically, Eloquent is utilized.
+    |
+    | If you have multiple user tables or models you may configure multiple
+    | providers to represent the model / table. These providers may then
+    | be assigned to any extra authentication guards you have defined.
+    |
+    | Supported: "database", "eloquent"
+    |
+    */
+
+    'providers' => [
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => env('AUTH_MODEL', App\Models\User::class),
+        ],
+
+        // 'users' => [
+        //     'driver' => 'database',
+        //     'table' => 'users',
+        // ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Resetting Passwords
+    |--------------------------------------------------------------------------
+    |
+    | These configuration options specify the behavior of Laravel's password
+    | reset functionality, including the table utilized for token storage
+    | and the user provider that is invoked to actually retrieve users.
+    |
+    | The expiry time is the number of minutes that each reset token will be
+    | considered valid. This security feature keeps tokens short-lived so
+    | they have less time to be guessed. You may change this as needed.
+    |
+    | The throttle setting is the number of seconds a user must wait before
+    | generating more password reset tokens. This prevents the user from
+    | quickly generating a very large amount of password reset tokens.
+    |
+    */
+
+    'passwords' => [
+        'users' => [
+            'provider' => 'users',
+            'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Password Confirmation Timeout
+    |--------------------------------------------------------------------------
+    |
+    | Here you may define the number of seconds before a password confirmation
+    | window expires and users are asked to re-enter their password via the
+    | confirmation screen. By default, the timeout lasts for three hours.
+    |
+    */
+
+    'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
+
+];
+
+```
+
+// --- FILE: config\cache.php ---
+```php
+<?php
+
+use Illuminate\Support\Str;
+
+return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default Cache Store
+    |--------------------------------------------------------------------------
+    |
+    | This option controls the default cache store that will be used by the
+    | framework. This connection is utilized if another isn't explicitly
+    | specified when running a cache operation inside the application.
+    |
+    */
+
+    'default' => env('CACHE_STORE', 'database'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Cache Stores
+    |--------------------------------------------------------------------------
+    |
+    | Here you may define all of the cache "stores" for your application as
+    | well as their drivers. You may even define multiple stores for the
+    | same cache driver to group types of items stored in your caches.
+    |
+    | Supported drivers: "array", "database", "file", "memcached",
+    |                    "redis", "dynamodb", "octane", "null"
+    |
+    */
+
+    'stores' => [
+
+        'array' => [
+            'driver' => 'array',
+            'serialize' => false,
+        ],
+
+        'database' => [
+            'driver' => 'database',
+            'connection' => env('DB_CACHE_CONNECTION'),
+            'table' => env('DB_CACHE_TABLE', 'cache'),
+            'lock_connection' => env('DB_CACHE_LOCK_CONNECTION'),
+            'lock_table' => env('DB_CACHE_LOCK_TABLE'),
+        ],
+
+        'file' => [
+            'driver' => 'file',
+            'path' => storage_path('framework/cache/data'),
+            'lock_path' => storage_path('framework/cache/data'),
+        ],
+
+        'memcached' => [
+            'driver' => 'memcached',
+            'persistent_id' => env('MEMCACHED_PERSISTENT_ID'),
+            'sasl' => [
+                env('MEMCACHED_USERNAME'),
+                env('MEMCACHED_PASSWORD'),
+            ],
+            'options' => [
+                // Memcached::OPT_CONNECT_TIMEOUT => 2000,
+            ],
+            'servers' => [
+                [
+                    'host' => env('MEMCACHED_HOST', '127.0.0.1'),
+                    'port' => env('MEMCACHED_PORT', 11211),
+                    'weight' => 100,
+                ],
+            ],
+        ],
+
+        'redis' => [
+            'driver' => 'redis',
+            'connection' => env('REDIS_CACHE_CONNECTION', 'cache'),
+            'lock_connection' => env('REDIS_CACHE_LOCK_CONNECTION', 'default'),
+        ],
+
+        'dynamodb' => [
+            'driver' => 'dynamodb',
+            'key' => env('AWS_ACCESS_KEY_ID'),
+            'secret' => env('AWS_SECRET_ACCESS_KEY'),
+            'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
+            'table' => env('DYNAMODB_CACHE_TABLE', 'cache'),
+            'endpoint' => env('DYNAMODB_ENDPOINT'),
+        ],
+
+        'octane' => [
+            'driver' => 'octane',
+        ],
+
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Cache Key Prefix
+    |--------------------------------------------------------------------------
+    |
+    | When utilizing the APC, database, memcached, Redis, and DynamoDB cache
+    | stores, there might be other applications using the same cache. For
+    | that reason, you may prefix every cache key to avoid collisions.
+    |
+    */
+
+    'prefix' => env('CACHE_PREFIX', Str::slug((string) env('APP_NAME', 'laravel')).'-cache-'),
+
+];
+
+```
+
+// --- FILE: config\database.php ---
+```php
+<?php
+
+use Illuminate\Support\Str;
+
+return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default Database Connection Name
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify which of the database connections below you wish
+    | to use as your default connection for database operations. This is
+    | the connection which will be utilized unless another connection
+    | is explicitly specified when you execute a query / statement.
+    |
+    */
+
+    'default' => env('DB_CONNECTION', 'sqlite'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Database Connections
+    |--------------------------------------------------------------------------
+    |
+    | Below are all of the database connections defined for your application.
+    | An example configuration is provided for each database system which
+    | is supported by Laravel. You're free to add / remove connections.
+    |
+    */
+
+    'connections' => [
+
+        'sqlite' => [
+            'driver' => 'sqlite',
+            'url' => env('DB_URL'),
+            'database' => env('DB_DATABASE', database_path('database.sqlite')),
+            'prefix' => '',
+            'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
+            'busy_timeout' => null,
+            'journal_mode' => null,
+            'synchronous' => null,
+            'transaction_mode' => 'DEFERRED',
+        ],
+
+        'mysql' => [
+            'driver' => 'mysql',
+            'url' => env('DB_URL'),
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE', 'laravel'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', ''),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => env('DB_CHARSET', 'utf8mb4'),
+            'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
+
+        'mariadb' => [
+            'driver' => 'mariadb',
+            'url' => env('DB_URL'),
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE', 'laravel'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', ''),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => env('DB_CHARSET', 'utf8mb4'),
+            'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
+
+        'pgsql' => [
+            'driver' => 'pgsql',
+            'url' => env('DB_URL'),
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '5432'),
+            'database' => env('DB_DATABASE', 'laravel'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', ''),
+            'charset' => env('DB_CHARSET', 'utf8'),
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'search_path' => 'public',
+            'sslmode' => 'prefer',
+        ],
+
+        'sqlsrv' => [
+            'driver' => 'sqlsrv',
+            'url' => env('DB_URL'),
+            'host' => env('DB_HOST', 'localhost'),
+            'port' => env('DB_PORT', '1433'),
+            'database' => env('DB_DATABASE', 'laravel'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', ''),
+            'charset' => env('DB_CHARSET', 'utf8'),
+            'prefix' => '',
+            'prefix_indexes' => true,
+            // 'encrypt' => env('DB_ENCRYPT', 'yes'),
+            // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
+        ],
+
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Migration Repository Table
+    |--------------------------------------------------------------------------
+    |
+    | This table keeps track of all the migrations that have already run for
+    | your application. Using this information, we can determine which of
+    | the migrations on disk haven't actually been run on the database.
+    |
+    */
+
+    'migrations' => [
+        'table' => 'migrations',
+        'update_date_on_publish' => true,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Redis Databases
+    |--------------------------------------------------------------------------
+    |
+    | Redis is an open source, fast, and advanced key-value store that also
+    | provides a richer body of commands than a typical key-value system
+    | such as Memcached. You may define your connection settings here.
+    |
+    */
+
+    'redis' => [
+
+        'client' => env('REDIS_CLIENT', 'phpredis'),
+
+        'options' => [
+            'cluster' => env('REDIS_CLUSTER', 'redis'),
+            'prefix' => env('REDIS_PREFIX', Str::slug((string) env('APP_NAME', 'laravel')).'-database-'),
+            'persistent' => env('REDIS_PERSISTENT', false),
+        ],
+
+        'default' => [
+            'url' => env('REDIS_URL'),
+            'host' => env('REDIS_HOST', '127.0.0.1'),
+            'username' => env('REDIS_USERNAME'),
+            'password' => env('REDIS_PASSWORD'),
+            'port' => env('REDIS_PORT', '6379'),
+            'database' => env('REDIS_DB', '0'),
+            'max_retries' => env('REDIS_MAX_RETRIES', 3),
+            'backoff_algorithm' => env('REDIS_BACKOFF_ALGORITHM', 'decorrelated_jitter'),
+            'backoff_base' => env('REDIS_BACKOFF_BASE', 100),
+            'backoff_cap' => env('REDIS_BACKOFF_CAP', 1000),
+        ],
+
+        'cache' => [
+            'url' => env('REDIS_URL'),
+            'host' => env('REDIS_HOST', '127.0.0.1'),
+            'username' => env('REDIS_USERNAME'),
+            'password' => env('REDIS_PASSWORD'),
+            'port' => env('REDIS_PORT', '6379'),
+            'database' => env('REDIS_CACHE_DB', '1'),
+            'max_retries' => env('REDIS_MAX_RETRIES', 3),
+            'backoff_algorithm' => env('REDIS_BACKOFF_ALGORITHM', 'decorrelated_jitter'),
+            'backoff_base' => env('REDIS_BACKOFF_BASE', 100),
+            'backoff_cap' => env('REDIS_BACKOFF_CAP', 1000),
+        ],
+
+    ],
+
+];
+
+```
+
+// --- FILE: config\filesystems.php ---
+```php
+<?php
+
+return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default Filesystem Disk
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify the default filesystem disk that should be used
+    | by the framework. The "local" disk, as well as a variety of cloud
+    | based disks are available to your application for file storage.
+    |
+    */
+
+    'default' => env('FILESYSTEM_DISK', 'local'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Filesystem Disks
+    |--------------------------------------------------------------------------
+    |
+    | Below you may configure as many filesystem disks as necessary, and you
+    | may even configure multiple disks for the same driver. Examples for
+    | most supported storage drivers are configured here for reference.
+    |
+    | Supported drivers: "local", "ftp", "sftp", "s3"
+    |
+    */
+
+    'disks' => [
+
+        'local' => [
+            'driver' => 'local',
+            'root' => storage_path('app/private'),
+            'serve' => true,
+            'throw' => false,
+            'report' => false,
+        ],
+
+        'public' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
+        's3' => [
+            'driver' => 's3',
+            'key' => env('AWS_ACCESS_KEY_ID'),
+            'secret' => env('AWS_SECRET_ACCESS_KEY'),
+            'region' => env('AWS_DEFAULT_REGION'),
+            'bucket' => env('AWS_BUCKET'),
+            'url' => env('AWS_URL'),
+            'endpoint' => env('AWS_ENDPOINT'),
+            'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
+            'throw' => false,
+            'report' => false,
+        ],
+
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Symbolic Links
+    |--------------------------------------------------------------------------
+    |
+    | Here you may configure the symbolic links that will be created when the
+    | `storage:link` Artisan command is executed. The array keys should be
+    | the locations of the links and the values should be their targets.
+    |
+    */
+
+    'links' => [
+        public_path('storage') => storage_path('app/public'),
+    ],
+
+];
+
+```
+
+// --- FILE: config\logging.php ---
+```php
+<?php
+
+use Monolog\Handler\NullHandler;
+use Monolog\Handler\StreamHandler;
+use Monolog\Handler\SyslogUdpHandler;
+use Monolog\Processor\PsrLogMessageProcessor;
+
+return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default Log Channel
+    |--------------------------------------------------------------------------
+    |
+    | This option defines the default log channel that is utilized to write
+    | messages to your logs. The value provided here should match one of
+    | the channels present in the list of "channels" configured below.
+    |
+    */
+
+    'default' => env('LOG_CHANNEL', 'stack'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Deprecations Log Channel
+    |--------------------------------------------------------------------------
+    |
+    | This option controls the log channel that should be used to log warnings
+    | regarding deprecated PHP and library features. This allows you to get
+    | your application ready for upcoming major versions of dependencies.
+    |
+    */
+
+    'deprecations' => [
+        'channel' => env('LOG_DEPRECATIONS_CHANNEL', 'null'),
+        'trace' => env('LOG_DEPRECATIONS_TRACE', false),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Log Channels
+    |--------------------------------------------------------------------------
+    |
+    | Here you may configure the log channels for your application. Laravel
+    | utilizes the Monolog PHP logging library, which includes a variety
+    | of powerful log handlers and formatters that you're free to use.
+    |
+    | Available drivers: "single", "daily", "slack", "syslog",
+    |                    "errorlog", "monolog", "custom", "stack"
+    |
+    */
+
+    'channels' => [
+
+        'stack' => [
+            'driver' => 'stack',
+            'channels' => explode(',', (string) env('LOG_STACK', 'single')),
+            'ignore_exceptions' => false,
+        ],
+
+        'single' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/laravel.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'replace_placeholders' => true,
+        ],
+
+        'daily' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/laravel.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'days' => env('LOG_DAILY_DAYS', 14),
+            'replace_placeholders' => true,
+        ],
+
+        'slack' => [
+            'driver' => 'slack',
+            'url' => env('LOG_SLACK_WEBHOOK_URL'),
+            'username' => env('LOG_SLACK_USERNAME', 'Laravel Log'),
+            'emoji' => env('LOG_SLACK_EMOJI', ':boom:'),
+            'level' => env('LOG_LEVEL', 'critical'),
+            'replace_placeholders' => true,
+        ],
+
+        'papertrail' => [
+            'driver' => 'monolog',
+            'level' => env('LOG_LEVEL', 'debug'),
+            'handler' => env('LOG_PAPERTRAIL_HANDLER', SyslogUdpHandler::class),
+            'handler_with' => [
+                'host' => env('PAPERTRAIL_URL'),
+                'port' => env('PAPERTRAIL_PORT'),
+                'connectionString' => 'tls://'.env('PAPERTRAIL_URL').':'.env('PAPERTRAIL_PORT'),
+            ],
+            'processors' => [PsrLogMessageProcessor::class],
+        ],
+
+        'stderr' => [
+            'driver' => 'monolog',
+            'level' => env('LOG_LEVEL', 'debug'),
+            'handler' => StreamHandler::class,
+            'handler_with' => [
+                'stream' => 'php://stderr',
+            ],
+            'formatter' => env('LOG_STDERR_FORMATTER'),
+            'processors' => [PsrLogMessageProcessor::class],
+        ],
+
+        'syslog' => [
+            'driver' => 'syslog',
+            'level' => env('LOG_LEVEL', 'debug'),
+            'facility' => env('LOG_SYSLOG_FACILITY', LOG_USER),
+            'replace_placeholders' => true,
+        ],
+
+        'errorlog' => [
+            'driver' => 'errorlog',
+            'level' => env('LOG_LEVEL', 'debug'),
+            'replace_placeholders' => true,
+        ],
+
+        'null' => [
+            'driver' => 'monolog',
+            'handler' => NullHandler::class,
+        ],
+
+        'emergency' => [
+            'path' => storage_path('logs/laravel.log'),
+        ],
+
+    ],
+
+];
+
+```
+
+// --- FILE: config\mail.php ---
+```php
+<?php
+
+return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default Mailer
+    |--------------------------------------------------------------------------
+    |
+    | This option controls the default mailer that is used to send all email
+    | messages unless another mailer is explicitly specified when sending
+    | the message. All additional mailers can be configured within the
+    | "mailers" array. Examples of each type of mailer are provided.
+    |
+    */
+
+    'default' => env('MAIL_MAILER', 'log'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Mailer Configurations
+    |--------------------------------------------------------------------------
+    |
+    | Here you may configure all of the mailers used by your application plus
+    | their respective settings. Several examples have been configured for
+    | you and you are free to add your own as your application requires.
+    |
+    | Laravel supports a variety of mail "transport" drivers that can be used
+    | when delivering an email. You may specify which one you're using for
+    | your mailers below. You may also add additional mailers if needed.
+    |
+    | Supported: "smtp", "sendmail", "mailgun", "ses", "ses-v2",
+    |            "postmark", "resend", "log", "array",
+    |            "failover", "roundrobin"
+    |
+    */
+
+    'mailers' => [
+
+        'smtp' => [
+            'transport' => 'smtp',
+            'scheme' => env('MAIL_SCHEME'),
+            'url' => env('MAIL_URL'),
+            'host' => env('MAIL_HOST', '127.0.0.1'),
+            'port' => env('MAIL_PORT', 2525),
+            'username' => env('MAIL_USERNAME'),
+            'password' => env('MAIL_PASSWORD'),
+            'timeout' => null,
+            'local_domain' => env('MAIL_EHLO_DOMAIN', parse_url((string) env('APP_URL', 'http://localhost'), PHP_URL_HOST)),
+        ],
+
+        'ses' => [
+            'transport' => 'ses',
+        ],
+
+        'postmark' => [
+            'transport' => 'postmark',
+            // 'message_stream_id' => env('POSTMARK_MESSAGE_STREAM_ID'),
+            // 'client' => [
+            //     'timeout' => 5,
+            // ],
+        ],
+
+        'resend' => [
+            'transport' => 'resend',
+        ],
+
+        'sendmail' => [
+            'transport' => 'sendmail',
+            'path' => env('MAIL_SENDMAIL_PATH', '/usr/sbin/sendmail -bs -i'),
+        ],
+
+        'log' => [
+            'transport' => 'log',
+            'channel' => env('MAIL_LOG_CHANNEL'),
+        ],
+
+        'array' => [
+            'transport' => 'array',
+        ],
+
+        'failover' => [
+            'transport' => 'failover',
+            'mailers' => [
+                'smtp',
+                'log',
+            ],
+            'retry_after' => 60,
+        ],
+
+        'roundrobin' => [
+            'transport' => 'roundrobin',
+            'mailers' => [
+                'ses',
+                'postmark',
+            ],
+            'retry_after' => 60,
+        ],
+
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Global "From" Address
+    |--------------------------------------------------------------------------
+    |
+    | You may wish for all emails sent by your application to be sent from
+    | the same address. Here you may specify a name and address that is
+    | used globally for all emails that are sent by your application.
+    |
+    */
+
+    'from' => [
+        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+        'name' => env('MAIL_FROM_NAME', 'Example'),
+    ],
+
+];
+
+```
+
+// --- FILE: config\queue.php ---
+```php
+<?php
+
+return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default Queue Connection Name
+    |--------------------------------------------------------------------------
+    |
+    | Laravel's queue supports a variety of backends via a single, unified
+    | API, giving you convenient access to each backend using identical
+    | syntax for each. The default queue connection is defined below.
+    |
+    */
+
+    'default' => env('QUEUE_CONNECTION', 'database'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Queue Connections
+    |--------------------------------------------------------------------------
+    |
+    | Here you may configure the connection options for every queue backend
+    | used by your application. An example configuration is provided for
+    | each backend supported by Laravel. You're also free to add more.
+    |
+    | Drivers: "sync", "database", "beanstalkd", "sqs", "redis", "failover", "null"
+    |
+    */
+
+    'connections' => [
+
+        'sync' => [
+            'driver' => 'sync',
+        ],
+
+        'database' => [
+            'driver' => 'database',
+            'connection' => env('DB_QUEUE_CONNECTION'),
+            'table' => env('DB_QUEUE_TABLE', 'jobs'),
+            'queue' => env('DB_QUEUE', 'default'),
+            'retry_after' => (int) env('DB_QUEUE_RETRY_AFTER', 90),
+            'after_commit' => false,
+        ],
+
+        'beanstalkd' => [
+            'driver' => 'beanstalkd',
+            'host' => env('BEANSTALKD_QUEUE_HOST', 'localhost'),
+            'queue' => env('BEANSTALKD_QUEUE', 'default'),
+            'retry_after' => (int) env('BEANSTALKD_QUEUE_RETRY_AFTER', 90),
+            'block_for' => 0,
+            'after_commit' => false,
+        ],
+
+        'sqs' => [
+            'driver' => 'sqs',
+            'key' => env('AWS_ACCESS_KEY_ID'),
+            'secret' => env('AWS_SECRET_ACCESS_KEY'),
+            'prefix' => env('SQS_PREFIX', 'https://sqs.us-east-1.amazonaws.com/your-account-id'),
+            'queue' => env('SQS_QUEUE', 'default'),
+            'suffix' => env('SQS_SUFFIX'),
+            'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
+            'after_commit' => false,
+        ],
+
+        'redis' => [
+            'driver' => 'redis',
+            'connection' => env('REDIS_QUEUE_CONNECTION', 'default'),
+            'queue' => env('REDIS_QUEUE', 'default'),
+            'retry_after' => (int) env('REDIS_QUEUE_RETRY_AFTER', 90),
+            'block_for' => null,
+            'after_commit' => false,
+        ],
+
+        'failover' => [
+            'driver' => 'failover',
+            'connections' => [
+                'database',
+                'sync',
+            ],
+        ],
+
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Job Batching
+    |--------------------------------------------------------------------------
+    |
+    | The following options configure the database and table that store job
+    | batching information. These options can be updated to any database
+    | connection and table which has been defined by your application.
+    |
+    */
+
+    'batching' => [
+        'database' => env('DB_CONNECTION', 'sqlite'),
+        'table' => 'job_batches',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Failed Queue Jobs
+    |--------------------------------------------------------------------------
+    |
+    | These options configure the behavior of failed queue job logging so you
+    | can control how and where failed jobs are stored. Laravel ships with
+    | support for storing failed jobs in a simple file or in a database.
+    |
+    | Supported drivers: "database-uuids", "dynamodb", "file", "null"
+    |
+    */
+
+    'failed' => [
+        'driver' => env('QUEUE_FAILED_DRIVER', 'database-uuids'),
+        'database' => env('DB_CONNECTION', 'sqlite'),
+        'table' => 'failed_jobs',
+    ],
+
+];
+
+```
+
+// --- FILE: config\services.php ---
+```php
+<?php
+
+return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Third Party Services
+    |--------------------------------------------------------------------------
+    |
+    | This file is for storing the credentials for third party services such
+    | as Mailgun, Postmark, AWS and more. This file provides the de facto
+    | location for this type of information, allowing packages to have
+    | a conventional file to locate the various service credentials.
+    |
+    */
+
+    'postmark' => [
+        'token' => env('POSTMARK_TOKEN'),
+    ],
+
+    'resend' => [
+        'key' => env('RESEND_KEY'),
+    ],
+
+    'ses' => [
+        'key' => env('AWS_ACCESS_KEY_ID'),
+        'secret' => env('AWS_SECRET_ACCESS_KEY'),
+        'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
+    ],
+
+    'slack' => [
+        'notifications' => [
+            'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),
+            'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
+        ],
+    ],
+
+];
+
+```
+
+// --- FILE: config\session.php ---
+```php
+<?php
+
+use Illuminate\Support\Str;
+
+return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default Session Driver
+    |--------------------------------------------------------------------------
+    |
+    | This option determines the default session driver that is utilized for
+    | incoming requests. Laravel supports a variety of storage options to
+    | persist session data. Database storage is a great default choice.
+    |
+    | Supported: "file", "cookie", "database", "memcached",
+    |            "redis", "dynamodb", "array"
+    |
+    */
+
+    'driver' => env('SESSION_DRIVER', 'database'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Session Lifetime
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify the number of minutes that you wish the session
+    | to be allowed to remain idle before it expires. If you want them
+    | to expire immediately when the browser is closed then you may
+    | indicate that via the expire_on_close configuration option.
+    |
+    */
+
+    'lifetime' => (int) env('SESSION_LIFETIME', 120),
+
+    'expire_on_close' => env('SESSION_EXPIRE_ON_CLOSE', false),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Session Encryption
+    |--------------------------------------------------------------------------
+    |
+    | This option allows you to easily specify that all of your session data
+    | should be encrypted before it's stored. All encryption is performed
+    | automatically by Laravel and you may use the session like normal.
+    |
+    */
+
+    'encrypt' => env('SESSION_ENCRYPT', false),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Session File Location
+    |--------------------------------------------------------------------------
+    |
+    | When utilizing the "file" session driver, the session files are placed
+    | on disk. The default storage location is defined here; however, you
+    | are free to provide another location where they should be stored.
+    |
+    */
+
+    'files' => storage_path('framework/sessions'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Session Database Connection
+    |--------------------------------------------------------------------------
+    |
+    | When using the "database" or "redis" session drivers, you may specify a
+    | connection that should be used to manage these sessions. This should
+    | correspond to a connection in your database configuration options.
+    |
+    */
+
+    'connection' => env('SESSION_CONNECTION'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Session Database Table
+    |--------------------------------------------------------------------------
+    |
+    | When using the "database" session driver, you may specify the table to
+    | be used to store sessions. Of course, a sensible default is defined
+    | for you; however, you're welcome to change this to another table.
+    |
+    */
+
+    'table' => env('SESSION_TABLE', 'sessions'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Session Cache Store
+    |--------------------------------------------------------------------------
+    |
+    | When using one of the framework's cache driven session backends, you may
+    | define the cache store which should be used to store the session data
+    | between requests. This must match one of your defined cache stores.
+    |
+    | Affects: "dynamodb", "memcached", "redis"
+    |
+    */
+
+    'store' => env('SESSION_STORE'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Session Sweeping Lottery
+    |--------------------------------------------------------------------------
+    |
+    | Some session drivers must manually sweep their storage location to get
+    | rid of old sessions from storage. Here are the chances that it will
+    | happen on a given request. By default, the odds are 2 out of 100.
+    |
+    */
+
+    'lottery' => [2, 100],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Session Cookie Name
+    |--------------------------------------------------------------------------
+    |
+    | Here you may change the name of the session cookie that is created by
+    | the framework. Typically, you should not need to change this value
+    | since doing so does not grant a meaningful security improvement.
+    |
+    */
+
+    'cookie' => env(
+        'SESSION_COOKIE',
+        Str::slug((string) env('APP_NAME', 'laravel')).'-session'
+    ),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Session Cookie Path
+    |--------------------------------------------------------------------------
+    |
+    | The session cookie path determines the path for which the cookie will
+    | be regarded as available. Typically, this will be the root path of
+    | your application, but you're free to change this when necessary.
+    |
+    */
+
+    'path' => env('SESSION_PATH', '/'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Session Cookie Domain
+    |--------------------------------------------------------------------------
+    |
+    | This value determines the domain and subdomains the session cookie is
+    | available to. By default, the cookie will be available to the root
+    | domain and all subdomains. Typically, this shouldn't be changed.
+    |
+    */
+
+    'domain' => env('SESSION_DOMAIN'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | HTTPS Only Cookies
+    |--------------------------------------------------------------------------
+    |
+    | By setting this option to true, session cookies will only be sent back
+    | to the server if the browser has a HTTPS connection. This will keep
+    | the cookie from being sent to you when it can't be done securely.
+    |
+    */
+
+    'secure' => env('SESSION_SECURE_COOKIE'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | HTTP Access Only
+    |--------------------------------------------------------------------------
+    |
+    | Setting this value to true will prevent JavaScript from accessing the
+    | value of the cookie and the cookie will only be accessible through
+    | the HTTP protocol. It's unlikely you should disable this option.
+    |
+    */
+
+    'http_only' => env('SESSION_HTTP_ONLY', true),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Same-Site Cookies
+    |--------------------------------------------------------------------------
+    |
+    | This option determines how your cookies behave when cross-site requests
+    | take place, and can be used to mitigate CSRF attacks. By default, we
+    | will set this value to "lax" to permit secure cross-site requests.
+    |
+    | See: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie#samesitesamesite-value
+    |
+    | Supported: "lax", "strict", "none", null
+    |
+    */
+
+    'same_site' => env('SESSION_SAME_SITE', 'lax'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Partitioned Cookies
+    |--------------------------------------------------------------------------
+    |
+    | Setting this value to true will tie the cookie to the top-level site for
+    | a cross-site context. Partitioned cookies are accepted by the browser
+    | when flagged "secure" and the Same-Site attribute is set to "none".
+    |
+    */
+
+    'partitioned' => env('SESSION_PARTITIONED_COOKIE', false),
+
+];
+
+```
+
+// --- FILE: context-gen.php ---
+```php
+<?php
+
+// =================================================================================
+// ULTIMATE LARAVEL CONTEXT GENERATOR (DEEP SCAN MODE)
+// =================================================================================
+// Fitur:
+// 1. Project Map: Memetakan struktur folder (agar AI paham hierarki).
+// 2. Deep Content Reading: Membaca file logika, config, test, dan view.
+// 3. Smart Exclusion: Tetap mengamankan .env dan mengabaikan binary 'vendor'.
+// =================================================================================
+
+// --- KONFIGURASI ---
+$outputFile = 'FULL_PROJECT_CONTEXT_DEEP.txt';
+
+// Folder yang HANYA dipetakan strukturnya (Nama file dicatat, Isi TIDAK dibaca)
+// Ini agar AI tau anda punya aset gambar/font tertentu tanpa baca binarinya.
+$structureOnlyFolders = [
+    'public',
+    'storage',
+    'node_modules' 
+];
+
+// Folder yang BENAR-BENAR DIABAIKAN (Tidak dicatat sama sekali)
+$ignoredFolders = [
+    '.git',
+    '.idea',
+    '.vscode',
+    'vendor', // Tetap diabaikan isinya karena AI sudah tau cara kerja Laravel Core
+    'build'
+];
+
+// File yang DIABAIKAN
+$ignoredFiles = [
+    '.env',             // SAFETY FIRST: Jangan pernah upload ini
+    'package-lock.json',
+    'composer.lock',    // Cukup baca composer.json
+    'context-generator-full.php',
+    $outputFile,
+    '.DS_Store',
+    'Thumbs.db'
+];
+
+// Ekstensi yang DIBACA ISINYA (Expanded for Full Context)
+$allowedExtensions = [
+    // Backend
+    'php', 'sql',
+    // Frontend
+    'blade.php', 'js', 'jsx', 'ts', 'tsx', 'vue', 'svelte',
+    // Styling
+    'css', 'scss', 'sass', 'less', 'tailwind.config.js',
+    // Config & Data
+    'json', 'xml', 'yml', 'yaml', 'env.example', 'gitignore', 'htaccess'
+];
+
+// --- FUNGSI PEMBANTU ---
+
+function getRelativePath($path) {
+    return str_replace(getcwd() . DIRECTORY_SEPARATOR, '', $path);
+}
+
+function shouldIgnore($path) {
+    global $ignoredFolders, $ignoredFiles;
+    $basename = basename($path);
+    if (in_array($basename, $ignoredFiles)) return true;
+    foreach ($ignoredFolders as $folder) {
+        if (strpos($path, DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR) !== false || 
+            strpos($path, $folder . DIRECTORY_SEPARATOR) === 0 ||
+            $basename === $folder) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// Fungsi 1: Membuat Peta Struktur Folder (Tree View)
+function generateProjectTree($dir, $prefix = '') {
+    global $ignoredFolders, $structureOnlyFolders;
+    $result = "";
+    $files = scandir($dir);
+    $files = array_diff($files, ['.', '..']); // Hapus . dan ..
+
+    // Filter file yang diignore total
+    $filteredFiles = [];
+    foreach($files as $file) {
+        if (!in_array($file, $ignoredFolders) && $file !== '.git') {
+            $filteredFiles[] = $file;
+        }
+    }
+
+    $count = count($filteredFiles);
+    $i = 0;
+
+    foreach ($filteredFiles as $file) {
+        $i++;
+        $path = $dir . DIRECTORY_SEPARATOR . $file;
+        $isLast = ($i == $count);
+        $marker = $isLast ? "└── " : "├── ";
+        
+        $result .= $prefix . $marker . $file . "\n";
+        
+        // Rekursif jika folder, TAPI cek apakah folder itu masuk 'Structure Only'
+        if (is_dir($path)) {
+            // Jika masuk structureOnly, kita tidak masuk lebih dalam (shallow) 
+            // atau masuk tapi tandai sebagai aset (tergantung preferensi, di sini kita masuk)
+            $newPrefix = $prefix . ($isLast ? "    " : "│   ");
+            
+            // Khusus node_modules/vendor/public/storage, kita batasi kedalamannya di tree
+            // agar tidak ada ribuan baris teks tree.
+            if (in_array($file, ['vendor', 'node_modules'])) {
+                 $result .= $newPrefix . "└── [Dependencies Omitted for Brevity]\n";
+            } else {
+                 $result .= generateProjectTree($path, $newPrefix);
+            }
+        }
+    }
+    return $result;
+}
+
+// Fungsi 2: Memindai Konten File
+function scanFileContents($dir, &$results = []) {
+    global $ignoredFolders, $ignoredFiles, $allowedExtensions, $structureOnlyFolders;
+
+    $files = scandir($dir);
+
+    foreach ($files as $file) {
+        if ($file == '.' || $file == '..') continue;
+        $path = realpath($dir . DIRECTORY_SEPARATOR . $file);
+        $relativePath = getRelativePath($path);
+
+        if (shouldIgnore($relativePath)) continue;
+
+        if (is_dir($path)) {
+            // Jika folder ini masuk kategori 'Structure Only', jangan baca isinya
+            if (in_array($file, $structureOnlyFolders)) continue;
+            
+            scanFileContents($path, $results);
+        } else {
+            $ext = pathinfo($file, PATHINFO_EXTENSION);
+            if (str_contains($file, '.blade.php')) $ext = 'blade.php'; // Handle blade
+
+            if (in_array($ext, $allowedExtensions)) {
+                $results[] = $path;
+            }
+        }
+    }
+    return $results;
+}
+
+// --- EKSEKUSI ---
+
+echo "🚀 Memulai Deep Scan Project Laravel...\n";
+
+// 1. Buat Header & Peta Struktur
+$header  = "=================================================================================\n";
+$header .= "PROJECT: LARAVEL DEEP CONTEXT ANALYSIS\n";
+$header .= "DATE: " . date('Y-m-d H:i:s') . "\n";
+$header .= "=================================================================================\n\n";
+
+echo "🌳 Membuat Peta Struktur Folder...\n";
+$treeMap = "--- PROJECT STRUCTURE (DIRECTORY TREE) ---\n";
+$treeMap .= ".\n" . generateProjectTree(getcwd());
+$treeMap .= "\n=================================================================================\n\n";
+
+// 2. Baca Konten File
+echo "📖 Membaca isi file logika & konfigurasi...\n";
+$filesToRead = scanFileContents(getcwd());
+$contentSection = "";
+
+foreach ($filesToRead as $index => $filePath) {
+    $relativePath = getRelativePath($filePath);
+    $ext = pathinfo($filePath, PATHINFO_EXTENSION);
+    
+    // Progress
+    if (($index + 1) % 50 == 0) echo ".";
+
+    $fileContent = file_get_contents($filePath);
+    
+    $contentSection .= "\n// --- FILE: {$relativePath} ---\n";
+    $contentSection .= "```{$ext}\n";
+    $contentSection .= $fileContent;
+    $contentSection .= "\n```\n";
+}
+
+// 3. Gabungkan dan Simpan
+file_put_contents($outputFile, $header . $treeMap . $contentSection);
+
+echo "\n\n✅ SELESAI! Konteks Lengkap tersimpan di: {$outputFile}\n";
+echo "📊 Total File Dibaca: " . count($filesToRead) . "\n";
+echo "👉 Ukuran File Akhir: " . round(filesize($outputFile) / 1024 / 1024, 2) . " MB\n";
+?>
+```
+
+// --- FILE: database\.gitignore ---
+```gitignore
+*.sqlite*
+
+```
+
+// --- FILE: database\factories\UserFactory.php ---
+```php
+<?php
+
+namespace Database\Factories;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ */
+class UserFactory extends Factory
+{
+    /**
+     * The current password being used by the factory.
+     */
+    protected static ?string $password;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        return [
+            'name' => fake()->name(),
+            'email' => fake()->unique()->safeEmail(),
+            'email_verified_at' => now(),
+            'password' => static::$password ??= Hash::make('password'),
+            'remember_token' => Str::random(10),
+        ];
+    }
+
+    /**
+     * Indicate that the model's email address should be unverified.
+     */
+    public function unverified(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'email_verified_at' => null,
+        ]);
+    }
+}
+
+```
+
+// --- FILE: database\migrations\2025_10_19_094740_create_users_table.php ---
+```php
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+{
+    Schema::create('users', function (Blueprint $table) {
+        $table->id();
+        $table->string('name');
+        $table->string('email')->unique();
+        $table->string('password');
+        $table->timestamps();
+    });
+}
+
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('users');
+    }
+};
+
+```
+
+// --- FILE: database\migrations\2025_10_19_094749_create_notes_table.php ---
+```php
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('notes', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->string('title');
+            $table->text('content');
+            $table->timestamps();
+
+            // Relasi ke tabel users
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('notes');
+    }
+};
+
+```
+
+// --- FILE: database\migrations\2025_10_19_124536_create_sessions_table.php ---
+```php
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('sessions', function (Blueprint $table) {
+            $table->string('id')->primary();
+            $table->foreignId('user_id')->nullable()->index();
+            $table->string('ip_address', 45)->nullable();
+            $table->text('user_agent')->nullable();
+            $table->longText('payload');
+            $table->integer('last_activity')->index();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('sessions');
+    }
+};
+
+```
+
+// --- FILE: database\migrations\2025_10_27_071134_create_gambars_table.php ---
+```php
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('gambars', function (Blueprint $table) {
+            $table->id();
+            $table->string('judul');
+            $table->string('gambar')->nullable(); // untuk menyimpan nama file gambar
+            $table->timestamps();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('gambars');
+    }
+};
+
+```
+
+// --- FILE: database\migrations\2025_12_08_024105_add_role_to_users_table.php ---
+```php
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('role')->default('user');
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('role');
+        });
+    }
+
+};
+
+```
+
+// --- FILE: database\seeders\DatabaseSeeder.php ---
+```php
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\User;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+
+class DatabaseSeeder extends Seeder
+{
+    use WithoutModelEvents;
+
+    /**
+     * Seed the application's database.
+     */
+    public function run(): void
+    {
+        // User::factory(10)->create();
+
+        User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+        ]);
+    }
+}
+
+```
+
+// --- FILE: package.json ---
+```json
+{
+    "$schema": "https://json.schemastore.org/package.json",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "vite build",
+        "dev": "vite"
+    },
+    "devDependencies": {
+        "@tailwindcss/vite": "^4.0.0",
+        "axios": "^1.11.0",
+        "concurrently": "^9.0.1",
+        "laravel-vite-plugin": "^2.0.0",
+        "tailwindcss": "^4.0.0",
+        "vite": "^7.0.7"
+    }
+}
+
+```
+
+// --- FILE: phpunit.xml ---
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+>
+    <testsuites>
+        <testsuite name="Unit">
+            <directory>tests/Unit</directory>
+        </testsuite>
+        <testsuite name="Feature">
+            <directory>tests/Feature</directory>
+        </testsuite>
+    </testsuites>
+    <source>
+        <include>
+            <directory>app</directory>
+        </include>
+    </source>
+    <php>
+        <env name="APP_ENV" value="testing"/>
+        <env name="APP_MAINTENANCE_DRIVER" value="file"/>
+        <env name="BCRYPT_ROUNDS" value="4"/>
+        <env name="CACHE_STORE" value="array"/>
+        <env name="DB_CONNECTION" value="sqlite"/>
+        <env name="DB_DATABASE" value=":memory:"/>
+        <env name="MAIL_MAILER" value="array"/>
+        <env name="QUEUE_CONNECTION" value="sync"/>
+        <env name="SESSION_DRIVER" value="array"/>
+        <env name="PULSE_ENABLED" value="false"/>
+        <env name="TELESCOPE_ENABLED" value="false"/>
+        <env name="NIGHTWATCH_ENABLED" value="false"/>
+    </php>
+</phpunit>
+
+```
+
+// --- FILE: resources\css\app.css ---
+```css
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+```
+
+// --- FILE: resources\js\app.js ---
+```js
+import './bootstrap';
+
+```
+
+// --- FILE: resources\js\bootstrap.js ---
+```js
+import axios from 'axios';
+window.axios = axios;
+
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+```
+
+// --- FILE: resources\views\admin\users.blade.php ---
+```php
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Aktivitas User</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8f8f8;
+            color: #222;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav {
+            background: #111;
+            color: #fff;
+            padding: 12px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        main {
+            flex: 1;
+            padding: 60px 15px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container-box {
+            width: 100%;
+            max-width: 1000px;
+            background: #fff;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+        }
+
+        .table-dark {
+            background: #111 !important;
+        }
+
+        .badge-admin {
+            background: #111;
+        }
+
+        .badge-user {
+            background: #555;
+        }
+
+        .btn-dark-custom {
+            background: #111;
+            border: none;
+            color: #fff;
+        }
+
+        .btn-dark-custom:hover {
+            background: #333;
+        }
+
+        footer {
+            background: #111;
+            color: #ccc;
+            text-align: center;
+            padding: 18px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+    <div><strong>Admin Panel</strong></div>
+    <div>
+        <a href="{{ url('/') }}">Beranda</a>
+        <a href="{{ route('logout') }}"
+           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+           Logout
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
+            @csrf
+        </form>
+    </div>
+</nav>
+
+<!-- CONTENT -->
+<main>
+    <div class="container-box">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="mb-0">Aktivitas Seluruh User</h4>
+            <span class="text-muted">Total User: {{ count($users) }}</span>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nama</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Jumlah Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($users as $user)
+                    <tr>
+                        <td class="fw-semibold">{{ $user->id }}</td>
+                        <td>{{ $user->name }}</td>
+                        <td class="text-muted">{{ $user->email }}</td>
+                        <td>
+                            @if($user->role === 'admin')
+                                <span class="badge badge-admin">Admin</span>
+                            @else
+                                <span class="badge badge-user">User</span>
+                            @endif
+                        </td>
+                        <td>
+                            <span class="badge bg-secondary">{{ $user->notes_count }}</span>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-end mt-4">
+            <a href="{{ url('/') }}" class="btn btn-dark-custom">← Kembali ke Beranda</a>
+        </div>
+
+    </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+    <p>© {{ date('Y') }} Catatan Harian | Admin Panel</p>
+</footer>
+
+</body>
+</html>
+
+```
+
+// --- FILE: resources\views\auth\login.blade.php ---
+```php
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masuk | Catatan Harian</title>
+
+    <!-- Google Font & Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f9f9f9, #ececec);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* subtle animated gradient shadow */
+        .background-blur {
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            filter: blur(120px);
+            background: radial-gradient(circle, rgba(0,0,0,0.15), transparent 70%);
+            animation: float 6s ease-in-out infinite alternate;
+        }
+        @keyframes float {
+            from {transform: translate(0,0);}
+            to {transform: translate(40px, -30px);}
+        }
+
+        .card {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 390px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+            padding: 40px 35px;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .app-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #111;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #222;
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: #333;
+            font-size: 0.95rem;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            box-shadow: none;
+            padding: 10px 12px;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .form-control:focus {
+            border-color: #111;
+            box-shadow: 0 0 0 0.2rem rgba(0,0,0,0.05);
+        }
+
+        .btn-primary {
+            width: 100%;
+            background: #111;
+            border: none;
+            border-radius: 8px;
+            padding: 10px;
+            font-weight: 500;
+            color: white;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #333;
+            transform: translateY(-2px);
+        }
+
+        p {
+            margin-top: 18px;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        p a {
+            color: #000;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        p a:hover {
+            text-decoration: underline;
+        }
+
+        .alert {
+            font-size: 0.9rem;
+            border-radius: 8px;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(10px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-blur"></div>
+
+    <div class="card">
+        <div class="app-title">Catatan Harian</div>
+        <h2>Masuk ke Akun</h2>
+
+        @if(session('error'))
+            <div class="alert alert-danger text-center">{{ session('error') }}</div>
+        @endif
+
+        @if(session('success'))
+            <div class="alert alert-success text-center">{{ session('success') }}</div>
+        @endif
+
+        <form method="POST" action="{{ url('/login') }}">
+            @csrf
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Alamat Email</label>
+                <input type="email" name="email" id="email" class="form-control" required placeholder="contoh@email.com">
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Kata Sandi</label>
+                <input type="password" name="password" id="password" class="form-control" required placeholder="********">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Masuk</button>
+        </form>
+
+        <p class="text-center">
+            Belum punya akun? <a href="{{ route('register') }}">Daftar Sekarang</a>
+        </p>
+    </div>
+
+</body>
+</html>
+
+```
+
+// --- FILE: resources\views\auth\register.blade.php ---
+```php
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar | Catatan Harian</title>
+
+    <!-- Google Font & Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f9f9f9, #ececec);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Subtle moving blur background */
+        .background-blur {
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            filter: blur(120px);
+            background: radial-gradient(circle, rgba(0,0,0,0.12), transparent 70%);
+            animation: float 6s ease-in-out infinite alternate;
+        }
+
+        @keyframes float {
+            from {transform: translate(0,0);}
+            to {transform: translate(40px, -30px);}
+        }
+
+        .card {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 420px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.08);
+            padding: 40px 35px;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .app-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #111;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #222;
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: #333;
+            font-size: 0.95rem;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            box-shadow: none;
+            padding: 10px 12px;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .form-control:focus {
+            border-color: #111;
+            box-shadow: 0 0 0 0.2rem rgba(0,0,0,0.05);
+        }
+
+        .btn-primary {
+            width: 100%;
+            background: #111;
+            border: none;
+            border-radius: 8px;
+            padding: 10px;
+            font-weight: 500;
+            color: white;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #333;
+            transform: translateY(-2px);
+        }
+
+        p {
+            margin-top: 18px;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        p a {
+            color: #000;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        p a:hover {
+            text-decoration: underline;
+        }
+
+        .alert {
+            font-size: 0.9rem;
+            border-radius: 8px;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(10px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-blur"></div>
+
+    <div class="card">
+        <div class="app-title">Catatan Harian</div>
+        <h2>Buat Akun Baru</h2>
+
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <ul class="mb-0 text-start">
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        @if(session('success'))
+            <div class="alert alert-success text-center">{{ session('success') }}</div>
+        @endif
+
+        <form method="POST" action="{{ url('/register') }}">
+            @csrf
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Nama Lengkap</label>
+                <input type="text" name="name" id="name" class="form-control" required placeholder="Masukkan nama Anda">
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Alamat Email</label>
+                <input type="email" name="email" id="email" class="form-control" required placeholder="contoh@email.com">
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Kata Sandi</label>
+                <input type="password" name="password" id="password" class="form-control" required placeholder="Minimal 6 karakter">
+            </div>
+            <div class="mb-3">
+                <label>Konfirmasi Password</label>
+                <input type="password" name="password_confirmation" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Daftar Sekarang</button>
+        </form>
+
+        <p class="text-center">
+            Sudah punya akun? <a href="{{ route('login') }}">Masuk di sini</a>
+        </p>
+    </div>
+
+</body>
+</html>
+
+```
+
+// --- FILE: resources\views\gambars\create.blade.php ---
+```php
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <h2>Tambah Gambar</h2>
+    <form action="{{ route('gambars.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="mb-3">
+            <label>Judul</label>
+            <input type="text" name="judul" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label>Upload Gambar</label>
+            <input type="file" name="gambar" class="form-control" accept=".jpg,.jpeg,.png">
+        </div>
+        <button type="submit" class="btn btn-success">Simpan</button>
+    </form>
+</div>
+@endsection
+
+```
+
+// --- FILE: resources\views\gambars\edit.blade.php ---
+```php
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <h2>Edit Gambar</h2>
+    <form action="{{ route('gambars.update', $gambar->id) }}" method="POST" enctype="multipart/form-data">
+        @csrf @method('PUT')
+        <div class="mb-3">
+            <label>Judul</label>
+            <input type="text" name="judul" value="{{ $gambar->judul }}" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label>Gambar Sekarang</label><br>
+            @if($gambar->gambar)
+                <img src="{{ asset('storage/'.$gambar->gambar) }}" width="150" alt="">
+            @endif
+        </div>
+        <div class="mb-3">
+            <label>Upload Gambar Baru (opsional)</label>
+            <input type="file" name="gambar" class="form-control" accept=".jpg,.jpeg,.png">
+        </div>
+        <button type="submit" class="btn btn-primary">Perbarui</button>
+    </form>
+</div>
+@endsection
+
+```
+
+// --- FILE: resources\views\gambars\index.blade.php ---
+```php
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <h2>Daftar Gambar</h2>
+    <a href="{{ route('gambars.create') }}" class="btn btn-primary mb-3">Tambah Gambar</a>
+
+    @if (session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
+    <div class="row">
+        @foreach($gambars as $item)
+            <div class="col-md-3 mb-3">
+                <div class="card">
+                    @if($item->gambar)
+                        <img src="{{ asset('storage/'.$item->gambar) }}" class="card-img-top" alt="{{ $item->judul }}">
+                    @else
+                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Tidak ada gambar">
+                    @endif
+                    <div class="card-body">
+                        <h5>{{ $item->judul }}</h5>
+                        <a href="{{ route('gambars.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{{ route('gambars.destroy', $item->id) }}" method="POST" class="d-inline">
+                            @csrf @method('DELETE')
+                            <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus?')">Hapus</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+</div>
+@endsection
+
+```
+
+// --- FILE: resources\views\notes\create.blade.php ---
+```php
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buat Catatan Baru</title>
+
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8f8f8;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        nav {
+            background: #111;
+            color: #fff;
+            padding: 12px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+        }
+
+        main {
+            flex: 1;
+            padding: 60px 15px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container-box {
+            max-width: 700px;
+            width: 100%;
+            background: #fff;
+            padding: 35px 40px;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+        }
+
+        .btn-success {
+            background-color: #111;
+            border: none;
+        }
+
+        footer {
+            background: #111;
+            color: #ccc;
+            text-align: center;
+            padding: 18px;
+            font-size: 0.9rem;
+        }
+
+        .img-preview {
+            margin-top: 10px;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav>
+    <div><strong>Catatan Harian</strong></div>
+    <div>
+        <a href="{{ url('/notes') }}">Beranda</a>
+        <a href="{{ route('logout') }}"
+           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            Logout
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<main>
+    <div class="container-box">
+        <h4 class="mb-4">Buat Catatan Baru</h4>
+
+        <form action="{{ route('notes.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+
+            <div class="mb-3">
+                <label class="form-label">Judul</label>
+                <input type="text" name="title" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Isi Catatan</label>
+                <textarea id="editor" name="content" class="form-control"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Upload Gambar (opsional)</label>
+                <input type="file" name="gambar" class="form-control" accept=".jpg,.jpeg,.png" onchange="previewImage(event)">
+                <img id="imgPreview" class="img-preview" alt="Preview Gambar">
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-success">Simpan</button>
+                <a href="{{ route('notes.index') }}" class="btn btn-secondary">Kembali</a>
+            </div>
+        </form>
+    </div>
+</main>
+
+<footer>
+    <p>© {{ date('Y') }} Catatan Harian | Dibuat dengan hati oleh Anda</p>
+</footer>
+
+<!-- Script Preview Gambar -->
+<script>
+function previewImage(event) {
+    const input = event.target;
+    const preview = document.getElementById('imgPreview');
+
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+        };
+        reader.readAsDataURL(input.files[0]);
+    } else {
+        preview.src = "";
+        preview.style.display = 'none';
+    }
+}
+</script>
+
+<!-- TinyMCE -->
+<script src="https://cdn.jsdelivr.net/npm/tinymce@6/tinymce.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    tinymce.init({
+        selector: '#editor',
+        height: 300,
+        menubar: false,
+        plugins: 'lists link code',
+        toolbar: 'undo redo | bold italic underline | fontsizeselect fontselect | alignleft aligncenter alignright | bullist numlist | link | code'
+    });
+});
+</script>
+</body>
+</html>
+
+```
+
+// --- FILE: resources\views\notes\edit.blade.php ---
+```php
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Catatan | Catatan Harian</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8f8f8;
+            color: #222;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        nav {
+            background: #111;
+            color: #fff;
+            padding: 12px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+        }
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 60px 15px;
+        }
+        .container-box {
+            max-width: 700px;
+            width: 100%;
+            background: #fff;
+            padding: 35px 40px;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+        }
+        h4 {
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+        .btn {
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-weight: 500;
+        }
+        .btn-success {
+            background-color: #111;
+            border: none;
+        }
+        footer {
+            background: #111;
+            color: #ccc;
+            text-align: center;
+            padding: 18px;
+            font-size: 0.9rem;
+        }
+        .img-preview {
+            margin-top: 10px;
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div><strong>Catatan Harian</strong></div>
+    <div>
+        <a href="{{ url('/notes') }}">Catatan Saya</a>
+        <a href="{{ route('logout') }}"
+           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+           Logout
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+    </div>
+</nav>
+
+<main>
+    <div class="container-box">
+        <h4>Edit Catatan</h4>
+
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <ul class="mb-0">
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <form action="{{ route('notes.update', $note->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+
+            <div class="mb-3">
+                <label class="form-label">Judul</label>
+                <input type="text" name="title" class="form-control"
+                       value="{{ old('title', $note->title) }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Isi Catatan</label>
+                <textarea id="editor" name="content" class="form-control">{{ old('content', $note->content) }}</textarea>
+            </div>
+
+            <!-- Tampilkan gambar lama -->
+            <div class="mb-3">
+                <label class="form-label">Gambar Saat Ini</label><br>
+                @if($note->gambar)
+                    <img src="{{ asset('storage/' . $note->gambar) }}" class="img-preview">
+                @else
+                    <p class="text-muted">Belum ada gambar</p>
+                @endif
+            </div>
+
+            <!-- Upload gambar baru -->
+            <div class="mb-3">
+                <label class="form-label">Ganti Gambar (opsional)</label>
+                <input type="file" name="gambar" class="form-control" accept=".jpg,.jpeg,.png">
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="{{ route('notes.index') }}" class="btn btn-secondary">← Kembali</a>
+                <button type="submit" class="btn btn-success px-4">Simpan Perubahan</button>
+            </div>
+
+        </form>
+    </div>
+</main>
+<footer>
+    <p>© {{ date('Y') }} Catatan Harian | Dibuat dengan hati oleh Anda</p>
+</footer>
+<!-- TinyMCE -->
+<script src="https://cdn.jsdelivr.net/npm/tinymce@6/tinymce.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    tinymce.init({
+        selector: '#editor',
+        height: 300,
+        menubar: false,
+        plugins: 'lists link code',
+        toolbar: 'undo redo | bold italic underline | fontsizeselect fontselect | alignleft aligncenter alignright | bullist numlist | linK | code'
+    });
+});
+</script>
+</body>
+</html>
+
+```
+
+// --- FILE: resources\views\notes\index.blade.php ---
+```php
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catatan Harian</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8f8f8;
+            color: #222;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav {
+            background: #111;
+            color: #fff;
+            padding: 12px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        main {
+            flex: 1;
+            padding: 60px 15px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container-box {
+            width: 100%;
+            max-width: 900px;
+            background: #fff;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+        }
+
+        .btn-dark {
+            background: #111;
+            border: none;
+        }
+
+        /* Tombol Lihat, Edit, Hapus disesuaikan */
+        .btn-view {
+            background-color: #444;
+            color: #fff;
+            border: none;
+        }
+        .btn-view:hover {
+            background-color: #222;
+        }
+
+        .btn-edit {
+            background-color: #000;
+            color: #fff;
+            border: none;
+        }
+        .btn-edit:hover {
+            background-color: #333;
+        }
+
+        .btn-delete {
+            background-color: #555;
+            color: #fff;
+            border: none;
+        }
+        .btn-delete:hover {
+            background-color: #333;
+        }
+
+        footer {
+            background: #111;
+            color: #ccc;
+            text-align: center;
+            padding: 18px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div><strong>Catatan Harian</strong></div>
+        <div>
+            <a href="{{ url('/notes') }}">Beranda</a>
+            <a href="{{ route('notes.create') }}">Tambah Catatan</a>
+            <a href="{{ route('logout') }}"
+               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+               Logout
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
+                @csrf
+            </form>
+        </div>
+    </nav>
+    <main>
+        <div class="container-box" >
+            <div class="d-flex align-items-center gap-3 justify-content-end">
+                <h5>Halo, {{ auth()->user()->name }} 👋</h5>
+            </div>
+            <h4 class="mb-4">Daftar Catatan</h4>
+            <a href="{{ route('notes.create') }}" class="btn btn-dark mb-3">+ Buat Catatan Baru</a>
+
+            @if(session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
+
+            @if($notes->isEmpty())
+                <p class="text-muted">Belum ada catatan yang dibuat.</p>
+            @else
+                <table class="table table-hover align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Judul</th>
+                            <th>Tanggal</th>
+                            <th class="text-center">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($notes as $note)
+                            <tr>
+                                <td>{!! $note->title !!}</td>
+                                <td>{{ $note->created_at->format('d M Y') }}</td>
+                                <td class="text-center">
+                                    <a href="{{ route('notes.show', $note->id) }}" class="btn btn-sm btn-view">Lihat</a>
+                                    <a href="{{ route('notes.edit', $note->id) }}" class="btn btn-sm btn-edit">Edit</a>
+                                    <form action="{{ route('notes.destroy', $note->id) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-sm btn-delete" onclick="return confirm('Hapus catatan ini?')">Hapus</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @endif
+        </div>
+    </main>
+    <footer>
+        <p>© {{ date('Y') }} Catatan Harian | Dibuat dengan hati oleh Anda</p>
+    </footer>
+</body>
+</html>
+
+```
+
+// --- FILE: resources\views\notes\show.blade.php ---
+```php
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lihat Catatan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8f8f8;
+            color: #222;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav {
+            background: #111;
+            color: #fff;
+            padding: 12px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        main {
+            flex: 1;
+            padding: 60px 15px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container-box {
+            width: 100%;
+            max-width: 800px;
+            background: #fff;
+            padding: 40px 50px;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+        }
+
+        .note-title {
+            font-weight: 600;
+            font-size: 1.6rem;
+        }
+
+        .note-content {
+            white-space: pre-wrap;
+            margin-top: 15px;
+            line-height: 1.7;
+        }
+
+        .note-image {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .note-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        footer {
+            background: #111;
+            color: #ccc;
+            text-align: center;
+            padding: 18px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div><strong>Catatan Harian</strong></div>
+        <div>
+            <a href="{{ url('/notes') }}">Beranda</a>
+            <a href="{{ route('logout') }}"
+               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+               Logout
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
+                @csrf
+            </form>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container-box">
+            <h4 class="note-title">{!! $note->title !!}</h4>
+            <p class="text-muted mb-2">Dibuat pada {{ $note->created_at->format('d M Y H:i') }}</p>
+            <hr>
+
+            <!-- Tampilkan gambar jika ada -->
+        @if($note->gambar)
+            <div class="note-image">
+                <img src="{{ asset('storage/' . $note->gambar) }}" alt="Gambar Catatan">
+            </div>
+        @endif
+            <div class="note-content">{!! $note->content !!}</div>
+            <div class="mt-4 d-flex justify-content-between">
+                <a href="{{ route('notes.index') }}" class="btn btn-secondary">← Kembali</a>
+                <a href="{{ route('notes.edit', $note->id) }}" class="btn btn-warning">Edit Catatan</a>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>© {{ date('Y') }} Catatan Harian | Dibuat dengan hati oleh Anda</p>
+    </footer>
+</body>
+</html>
+
+```
+
+// --- FILE: resources\views\welcome.blade.php ---
+```php
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catatan Harian</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Animate.css for subtle fade effects -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <style>
+        html, body {
+            scroll-behavior: smooth;
+            background-color: #f8f8f8;
+        }
+
+        .fade-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1.2s ease, transform 1.2s ease;
+        }
+        .fade-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Parallax background effect */
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: black;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        footer a:hover {
+            color: #000;
+            text-decoration: underline;
+        }
+
+        /* Smooth parallax scroll */
+        .parallax::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255,255,255,0.65);
+        }
+    </style>
+</head>
+<body class="font-[Poppins] text-gray-800">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 w-full bg-white/80 backdrop-blur-lg shadow-sm z-50">
+        <div class="max-w-6xl mx-auto flex justify-between items-center py-4 px-6">
+            <h1 class="text-2xl font-semibold text-gray-900">Catatan<span class="font-light">Harian</span></h1>
+            <div class="space-x-8 text-sm font-medium">
+                <a href="#fitur" class="nav-link">Fitur</a>
+                <a href="#tentang" class="nav-link">Tentang</a>
+                <a href="{{ route('login') }}" class="bg-black text-white px-5 py-2 rounded-full hover:bg-gray-800 transition">Mulai</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center parallax"
+        style="background-image: url('https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1950&q=80');">
+        <div class="absolute inset-0 bg-black/40"></div>
+        <div class="relative text-center text-white px-6 fade-section">
+            <h2 class="text-5xl md:text-6xl font-semibold mb-6 animate__animated animate__fadeInDown">Catat Setiap Momen</h2>
+            <p class="max-w-lg mx-auto text-lg font-light mb-8 animate__animated animate__fadeInUp">
+                Simpan cerita hidupmu dalam bentuk digital yang aman dan pribadi.
+            </p>
+            <a href="{{ route('login') }}" class="bg-white text-black px-8 py-3 rounded-full font-semibold hover:bg-gray-200 transition animate__animated animate__fadeInUp animate__delay-1s">
+                Mulai Sekarang
+            </a>
+        </div>
+    </section>
+
+    <!-- Fitur Section -->
+    <section id="fitur" class="min-h-screen flex items-center justify-center bg-gray-50 fade-section">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <h2 class="text-4xl font-semibold mb-10">Fitur Unggulan</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="bg-white p-8 shadow-md rounded-xl hover:shadow-lg transition-all">
+                    <h3 class="font-semibold text-xl mb-4">✍️ Tambah Catatan</h3>
+                    <p class="text-gray-600">Tulis pikiran dan pengalamanmu kapan saja dengan antarmuka sederhana namun elegan.</p>
+                </div>
+                <div class="bg-white p-8 shadow-md rounded-xl hover:shadow-lg transition-all">
+                    <h3 class="font-semibold text-xl mb-4">🗂️ Edit & Hapus</h3>
+                    <p class="text-gray-600">Ubah atau hapus catatan lama dengan mudah sesuai keinginanmu.</p>
+                </div>
+                <div class="bg-white p-8 shadow-md rounded-xl hover:shadow-lg transition-all">
+                    <h3 class="font-semibold text-xl mb-4">🔒 Privasi Aman</h3>
+                    <p class="text-gray-600">Setiap catatan hanya dapat diakses oleh akunmu sendiri, menjaga privasimu sepenuhnya.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tentang Section -->
+    <section id="tentang" class="min-h-screen flex items-center justify-center bg-white fade-section">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-4xl font-semibold mb-6">Tentang Aplikasi</h2>
+            <p class="text-gray-600 text-lg leading-relaxed mb-10">
+                <strong>Catatan Harian</strong> dibuat untuk membantu kamu mengabadikan momen, ide, atau emosi dalam satu tempat pribadi.
+                Dengan desain yang minimalis dan modern, kamu bisa menulis tanpa gangguan dan menyimpan setiap cerita hidupmu dengan aman.
+            </p>
+            <a href="{{ route('register') }}" class="inline-block bg-black text-white px-10 py-3 rounded-full hover:bg-gray-800 transition">
+                Daftar Sekarang
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-gray-400 text-sm text-center py-8">
+        <p class="mb-3">© 2025 Catatan Harian — Semua Hak Dilindungi</p>
+        <div class="flex justify-center space-x-6">
+            <a href="#fitur" class="hover:text-white">Fitur</a>
+            <a href="#tentang" class="hover:text-white">Tentang</a>
+            <a href="{{ route('login') }}" class="hover:text-white">Masuk</a>
+        </div>
+    </footer>
+
+    <!-- Fade on scroll -->
+    <script>
+        const sections = document.querySelectorAll('.fade-section');
+        const revealOnScroll = () => {
+            const triggerBottom = window.innerHeight * 0.9;
+            sections.forEach(sec => {
+                const rect = sec.getBoundingClientRect().top;
+                if (rect < triggerBottom) sec.classList.add('visible');
+            });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
+    </script>
+</body>
+</html>
+
+```
+
+// --- FILE: routes\console.php ---
+```php
+<?php
+
+use Illuminate\Foundation\Inspiring;
+use Illuminate\Support\Facades\Artisan;
+
+Artisan::command('inspire', function () {
+    $this->comment(Inspiring::quote());
+})->purpose('Display an inspiring quote');
+
+```
+
+// --- FILE: routes\web.php ---
+```php
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\NoteController;
+use App\Http\Controllers\GambarController;
+use App\Http\Controllers\AdminController; // ✅ WAJIB
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+// ===== AUTH =====
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// ===== USER NOTES =====
+Route::middleware('auth')->group(function () {
+    Route::resource('notes', NoteController::class);
+});
+
+// ===== GAMBAR =====
+Route::resource('gambars', GambarController::class);
+
+// ===== ADMIN ONLY =====
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
+});
+
+```
+
+// --- FILE: tests\Feature\ExampleTest.php ---
+```php
+<?php
+
+test('the application returns a successful response', function () {
+    $response = $this->get('/');
+
+    $response->assertStatus(200);
+});
+
+```
+
+// --- FILE: tests\Pest.php ---
+```php
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Test Case
+|--------------------------------------------------------------------------
+|
+| The closure you provide to your test functions is always bound to a specific PHPUnit test
+| case class. By default, that class is "PHPUnit\Framework\TestCase". Of course, you may
+| need to change it using the "pest()" function to bind a different classes or traits.
+|
+*/
+
+pest()->extend(Tests\TestCase::class)
+ // ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
+    ->in('Feature');
+
+/*
+|--------------------------------------------------------------------------
+| Expectations
+|--------------------------------------------------------------------------
+|
+| When you're writing tests, you often need to check that values meet certain conditions. The
+| "expect()" function gives you access to a set of "expectations" methods that you can use
+| to assert different things. Of course, you may extend the Expectation API at any time.
+|
+*/
+
+expect()->extend('toBeOne', function () {
+    return $this->toBe(1);
+});
+
+/*
+|--------------------------------------------------------------------------
+| Functions
+|--------------------------------------------------------------------------
+|
+| While Pest is very powerful out-of-the-box, you may have some testing code specific to your
+| project that you don't want to repeat in every file. Here you can also expose helpers as
+| global functions to help you to reduce the number of lines of code in your test files.
+|
+*/
+
+function something()
+{
+    // ..
+}
+
+```
+
+// --- FILE: tests\TestCase.php ---
+```php
+<?php
+
+namespace Tests;
+
+use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+
+abstract class TestCase extends BaseTestCase
+{
+    //
+}
+
+```
+
+// --- FILE: tests\Unit\ExampleTest.php ---
+```php
+<?php
+
+test('that true is true', function () {
+    expect(true)->toBeTrue();
+});
+
+```
+
+// --- FILE: vite.config.js ---
+```js
+import { defineConfig } from 'vite';
+import laravel from 'laravel-vite-plugin';
+import tailwindcss from '@tailwindcss/vite';
+
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: ['resources/css/app.css', 'resources/js/app.js'],
+            refresh: true,
+        }),
+        tailwindcss(),
+    ],
+});
+
+```

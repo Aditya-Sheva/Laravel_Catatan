@@ -19,11 +19,17 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
+
+            if (auth()->user()->role === 'admin') {
+                return redirect()->route('admin.users');
+            }
+
             return redirect()->route('notes.index');
         }
 
         return back()->with('error', 'Email atau password salah!');
     }
+
 
     public function showRegister()
     {
@@ -38,14 +44,18 @@ class AuthController extends Controller
             'password' => 'required|confirmed|min:6'
         ]);
 
+        $role = User::count() === 0 ? 'admin' : 'user';
+
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => $role
         ]);
 
         return redirect()->route('login')->with('success', 'Pendaftaran berhasil!');
     }
+
 
     public function logout()
     {

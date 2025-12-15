@@ -107,15 +107,15 @@
             <h2 class="text-4xl font-semibold mb-10">Fitur Unggulan</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
                 <div class="bg-white p-8 shadow-md rounded-xl hover:shadow-lg transition-all">
-                    <h3 class="font-semibold text-xl mb-4">✍️ Tambah Catatan</h3>
+                    <h3 class="font-semibold text-xl mb-4">Tambah Catatan</h3>
                     <p class="text-gray-600">Tulis pikiran dan pengalamanmu kapan saja dengan antarmuka sederhana namun elegan.</p>
                 </div>
                 <div class="bg-white p-8 shadow-md rounded-xl hover:shadow-lg transition-all">
-                    <h3 class="font-semibold text-xl mb-4">🗂️ Edit & Hapus</h3>
+                    <h3 class="font-semibold text-xl mb-4">Edit & Hapus</h3>
                     <p class="text-gray-600">Ubah atau hapus catatan lama dengan mudah sesuai keinginanmu.</p>
                 </div>
                 <div class="bg-white p-8 shadow-md rounded-xl hover:shadow-lg transition-all">
-                    <h3 class="font-semibold text-xl mb-4">🔒 Privasi Aman</h3>
+                    <h3 class="font-semibold text-xl mb-4">Privasi Aman</h3>
                     <p class="text-gray-600">Setiap catatan hanya dapat diakses oleh akunmu sendiri, menjaga privasimu sepenuhnya.</p>
                 </div>
             </div>

@@ -7,70 +7,113 @@
 
     <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
 
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background: #f8f8f8;
+            background: linear-gradient(180deg, #f5f5f5, #eeeeee, #e6e6e6);
             margin: 0;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
         }
 
+        /* NAVBAR */
         nav {
-            background: #111;
+            background: rgba(20, 20, 20, 0.92);
+            backdrop-filter: blur(8px);
             color: #fff;
-            padding: 12px 40px;
+            padding: 16px 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            letter-spacing: 0.4px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+        }
+
+        nav strong {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.55rem;
+            letter-spacing: 0.5px;
         }
 
         nav a {
             color: #fff;
             text-decoration: none;
-            margin-left: 20px;
-            font-weight: 500;
+            margin-left: 22px;
+            font-size: 0.95rem;
+            transition: 0.25s;
         }
 
+        nav a:hover {
+            color: #dcdcdc;
+        }
+
+        /* MAIN WRAPPER */
         main {
             flex: 1;
-            padding: 60px 15px;
+            padding: 50px 20px;
             display: flex;
             justify-content: center;
+            animation: fadeIn 0.6s ease;
         }
 
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* CARD */
         .container-box {
-            max-width: 700px;
             width: 100%;
+            max-width: 850px;
             background: #fff;
-            padding: 35px 40px;
-            border-radius: 12px;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+            padding: 45px 55px;
+            border-radius: 16px;
+            box-shadow: 0 14px 30px rgba(0,0,0,0.08);
         }
 
+        h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+        }
+
+        /* BUTTON THEME */
         .btn-success {
-            background-color: #111;
-            border: none;
+            background: #2B2B2B;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 500;
+            transition: 0.2s;
         }
 
+        .btn-success:hover {
+            background: #1a1a1a;
+        }
+
+        .btn-secondary {
+            border-radius: 10px;
+        }
+
+        /* IMAGE PREVIEW */
+        .img-preview {
+            margin-top: 12px;
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: none;
+        }
+
+        /* FOOTER */
         footer {
             background: #111;
-            color: #ccc;
+            color: #bbb;
             text-align: center;
             padding: 18px;
             font-size: 0.9rem;
-        }
-
-        .img-preview {
-            margin-top: 10px;
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-            display: none;
+            margin-top: auto;
         }
     </style>
 </head>
@@ -78,16 +121,14 @@
 
 <!-- Navbar -->
 <nav>
-    <div><strong>Catatan Harian</strong></div>
+    <strong>Catatan Harian</strong>
     <div>
         <a href="{{ url('/notes') }}">Beranda</a>
         <a href="{{ route('logout') }}"
            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             Logout
         </a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-            @csrf
-        </form>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
     </div>
 </nav>
 
@@ -101,7 +142,7 @@
 
             <div class="mb-3">
                 <label class="form-label">Judul</label>
-                <input type="text" name="title" class="form-control" required>
+                <input type="text" name="title" class="form-control" required placeholder="Masukkan judul catatan...">
             </div>
 
             <div class="mb-3">
@@ -116,15 +157,16 @@
             </div>
 
             <div class="d-flex gap-2">
-                <button type="submit" class="btn btn-success">Simpan</button>
+                <button type="submit" class="btn btn-success">Simpan Catatan</button>
                 <a href="{{ route('notes.index') }}" class="btn btn-secondary">Kembali</a>
             </div>
+
         </form>
     </div>
 </main>
 
 <footer>
-    <p>© {{ date('Y') }} Catatan Harian | Dibuat dengan hati oleh Anda</p>
+    © {{ date('Y') }} Catatan Harian — Dibuat dengan hati oleh Anda
 </footer>
 
 <!-- Script Preview Gambar -->
@@ -156,9 +198,11 @@ document.addEventListener("DOMContentLoaded", function () {
         height: 300,
         menubar: false,
         plugins: 'lists link code',
-        toolbar: 'undo redo | bold italic underline | fontsizeselect fontselect | alignleft aligncenter alignright | bullist numlist | link | code'
+        toolbar: 'undo redo | bold italic underline | fontsize | alignleft aligncenter alignright | bullist numlist | link | code',
+        content_style: "body { font-family:'Poppins'; font-size:15px; }"
     });
 });
 </script>
+
 </body>
 </html>

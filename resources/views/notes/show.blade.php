@@ -70,6 +70,18 @@
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
+        .btn-edit-custom {
+            background: #111;
+            color: #fff;
+            border: 2px solid #111;
+            transition: 0.25s ease;
+        }
+
+        .btn-edit-custom:hover {
+            background: #fff;
+            color: #111;
+            border-color: #111;
+        }
 
         footer {
             background: #111;
@@ -110,7 +122,7 @@
             <div class="note-content">{!! $note->content !!}</div>
             <div class="mt-4 d-flex justify-content-between">
                 <a href="{{ route('notes.index') }}" class="btn btn-secondary">← Kembali</a>
-                <a href="{{ route('notes.edit', $note->id) }}" class="btn btn-warning">Edit Catatan</a>
+                <a href="{{ route('notes.edit', $note->id) }}" class="btn btn-edit-custom">Edit Catatan</a>
             </div>
         </div>
     </main>
